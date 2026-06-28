@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Tech - Outils Gratuits</title>
+    <!-- On charge une bibliothèque gratuite pour créer les QR codes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 { color: #333; margin-bottom: 20px; }
+        input {
+            width: 90%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 95%;
+        }
+        button:hover { background-color: #0056b3; }
+        #qrcode {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Smart Tech QR Code</h1>
+    <p>Entre ton lien ci-dessous pour générer un QR Code gratuit :</p>
+    
+    <input type="text" id="text-input" placeholder="https://ton-site.com" />
+    <button onclick="genererQR()">Générer le QR Code</button>
+
+    <!-- C'est ici que le QR code va s'afficher -->
+    <div id="qrcode"></div>
+</div>
+
+<script>
+    // Voici la petite fonction JavaScript qui fait la magie
+    function genererQR() {
+        var texte = document.getElementById("text-input").value;
+        var conteneurQR = document.getElementById("qrcode");
+        
+        // On vide le précédent QR code s'il y en avait un
+        conteneurQR.innerHTML = "";
+        
+        if (texte.trim() !== "") {
+            // On utilise la bibliothèque pour dessiner le QR Code
+            new QRCode(conteneurQR, {
+                text: texte,
+                width: 200,
+                height: 200
+            });
+        } else {
+            alert("Oups ! Tu dois écrire ou coller un lien d'abord.");
+        }
+    }
+</script>
+
+</body>
+  </html>

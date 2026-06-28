@@ -3,90 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Tech - Outils Gratuits</title>
-    <!-- On charge une bibliothèque gratuite pour créer les QR codes -->
+    <title>Smart Tech - Créateur de Sites & Outils</title>
+    <!-- Bibliothèque pour le QR code -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #f0f2f5; 
+            margin: 0; 
+            padding: 20px; 
         }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
+        .container-global {
+            max-width: 600px;
+            margin: 0 auto;
         }
-        h1 { color: #333; margin-bottom: 20px; }
-        input {
-            width: 90%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
+        .box { 
+            background: white; 
+            padding: 30px; 
+            margin-bottom: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
         }
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            width: 95%;
-        }
-        button:hover { background-color: #0056b3; }
-        #qrcode {
-            margin-top: 25px;
-            display: flex;
-            justify-content: center;
-        }
+        h2 { color: #333; margin-top: 0; }
+        label { display: block; margin-top: 15px; font-weight: bold; color: #555; }
+        input, select { width: 100%; padding: 12px; margin-top: 8px; border: 2px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; color: white; border: none; padding: 14px; margin-top: 20px; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        
+        .btn-site { background: #28a745; }
+        .btn-site:hover { background: #218838; }
+        .btn-qr { background: #007bff; }
+        .btn-qr:hover { background: #0056b3; }
+        
+        #qrcode { margin-top: 25px; display: flex; justify-content: center; }
+
+        /* Style du site virtuel généré (caché au début) */
+        #site-genere { display: none; padding: 0; margin: -20px; font-family: 'Segoe UI', sans-serif; }
+        .hero { text-align: center; padding: 100px 20px; color: white; }
+        .contenu { padding: 50px; text-align: center; background: white; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Smart Tech QR Code</h1>
-    <p>Entre ton lien ci-dessous pour générer un QR Code gratuit :</p>
-    
-    <input type="text" id="text-input" placeholder="https://ton-site.com" />
-    <button onclick="genererQR()">Générer le QR Code</button>
+<div class="container-global">
 
-    <!-- C'est ici que le QR code va s'afficher -->
-    <div id="qrcode"></div>
+    <!-- SECTION 1 : LE CRÉATEUR DE SITE -->
+    <div id="formulaire-section" class="box">
+        <h2>🚀 Smart Tech - Crée ton site en 1 clic</h2>
+        <p>Remplis les informations pour générer ton site immédiatement :</p>
+        
+        <label>Nom de ton entreprise :</label>
+        <input type="text" id="nom-site" placeholder="Ex: Grand Hôtel de Kinshasa">
+
+        <label>Ton activité / Métier :</label>
+        <input type="text" id="activite-site" placeholder="Ex: Hébergement et Événementiel">
+
+        <label>Numéro de Téléphone :</label>
+        <input type="text" id="tel-site" placeholder="Ex: +243 890 000 000">
+
+        <label>Couleur du design :</label>
+        <select id="couleur-site">
+            <option value="#007bff">Bleu Moderne</option>
+            <option value="#ff4757">Rouge Dynamique</option>
+            <option value="#2ed573">Vert Écologique</option>
+            <option value="#2f3542">Noir Élégant</option>
+        </select>
+
+        <button class="btn-site" onclick="genererLeSite()">Créer mon site internet</button>
+    </div>
+
+    <!-- SECTION 2 : LE GÉNÉRATEUR DE QR CODE GRATUIT -->
+    <div id="qr-section" class="box">
+        <h2>🖼️ Service Gratuit : QR Code Generator</h2>
+        <p>Entre ton lien ci-dessous pour obtenir un QR Code instantané :</p>
+        
+        <input type="text" id="text-input" placeholder="https://smarttech.com" />
+        <button class="btn-qr" onclick="genererQR()">Générer le QR Code</button>
+
+        <div id="qrcode"></div>
+    </div>
+
+    <!-- SECTION INTERNE : LE SITE DU CLIENT APRÈS SÉLECTION (CACHÉ) -->
+    <div id="site-genere">
+        <div class="hero" id="site-hero">
+            <h1 id="site-titre">Nom de l'entreprise</h1>
+            <p id="site-description">Description de l'activité</p>
+        </div>
+        <div class="contenu">
+            <h2>Contactez-nous</h2>
+            <p>Nous sommes à votre disposition. Appelez-nous directement au :</p>
+            <h3 id="site-telephone" style="color: #333;">Téléphone</h3>
+            <br><br>
+            <button style="width: auto; background: #333;" onclick="location.reload()">Retourner à Smart Tech</button>
+        </div>
+    </div>
+
 </div>
 
 <script>
-    // Voici la petite fonction JavaScript qui fait la magie
+    // Script pour le QR Code
     function genererQR() {
         var texte = document.getElementById("text-input").value;
         var conteneurQR = document.getElementById("qrcode");
-        
-        // On vide le précédent QR code s'il y en avait un
         conteneurQR.innerHTML = "";
         
         if (texte.trim() !== "") {
-            // On utilise la bibliothèque pour dessiner le QR Code
-            new QRCode(conteneurQR, {
-                text: texte,
-                width: 200,
-                height: 200
-            });
+            new QRCode(conteneurQR, { text: texte, width: 200, height: 200 });
         } else {
             alert("Oups ! Tu dois écrire ou coller un lien d'abord.");
         }
     }
+
+    // Script pour la simulation du site internet
+    function genererLeSite() {
+        var nom = document.getElementById("nom-site").value;
+        var activite = document.getElementById("activite-site").value;
+        var telephone = document.getElementById("tel-site").value;
+        var couleur = document.getElementById("couleur-site").value;
+
+        if(nom.trim() === "") {
+            alert("S'il te plaît, entre au moins le nom de ton entreprise !");
+            return;
+        }
+
+        // On remplit le template virtuel
+        document.getElementById("site-titre").innerText = nom;
+        document.getElementById("site-description").innerText = activite;
+        document.getElementById("site-telephone").innerText = telephone;
+        document.getElementById("site-hero").style.backgroundColor = couleur;
+
+        // On cache toute l'interface Smart Tech (Formulaire + QR Code)
+        document.getElementById("formulaire-section").style.display = "none";
+        document.getElementById("qr-section").style.display = "none";
+        
+        // On affiche le site tout neuf
+        document.getElementById("site-genere").style.display = "block";
+        document.body.style.background = "#ffffff";
+    }
 </script>
 
 </body>
-  </html>
+</html>

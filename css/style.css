@@ -256,3 +256,51 @@ footer{
 }
 
 }
+/* --- À AJOUTER DIRECTEMENT EN DESSOUS DE .nav-links { gap:18px; } --- */
+
+  /* Styles du bouton burger (les 3 barres) à mettre HORS de la media query, juste avant elle si possible, ou au-dessus */
+  .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 25px;
+      height: 20px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+  }
+  .menu-toggle .bar {
+      height: 3px;
+      width: 100%;
+      background-color: #0F172A; /* Reprend le bleu foncé de votre footer */
+      border-radius: 10px;
+      transition: all 0.3s ease;
+  }
+
+/* --- À AJOUTER À L'INTÉRIEUR DE VOTRE @media (max-width:768px) ACTUELLE --- */
+  .menu-toggle {
+      display: flex; /* On affiche le burger sur mobile */
+  }
+
+  .nav-links {
+      display: none; /* Remplace le comportement par défaut pour masquer le menu */
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+      padding: 20px 0;
+      z-index: 100;
+  }
+
+  .nav-links li {
+      text-align: center;
+      margin: 15px 0;
+  }
+
+  .nav-links.active {
+      display: flex; /* S'affiche quand on clique sur le burger */
+    }

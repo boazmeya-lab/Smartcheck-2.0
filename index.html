@@ -82,7 +82,7 @@
             cursor: pointer;
         }
 
-        /* AJOUT : Styles pour l'affichage correct des réductions de prix */
+        /* Styles pour l'affichage correct des réductions de prix */
         .price {
             display: flex;
             flex-direction: column;
@@ -104,6 +104,59 @@
             color: #e67e22;
             font-weight: 600;
         }
+
+        /* NOUVEAU : Centrage complet des offres et des boutons */
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centre le bouton et le titre horizontalement */
+            text-align: center;  /* Centre les textes basiques */
+            padding: 30px 20px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 320px;
+        }
+
+        /* Recentrer la liste tout en gardant les puces alignées à gauche */
+        .price-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left; /* Aligne les lignes de texte à gauche pour plus de propreté */
+            width: 100%;
+            max-width: 240px; /* Aligne le bloc de la liste au milieu */
+        }
+
+        .price-card ul li {
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Ajustement du bouton de sélection */
+        .price-card .btn-cta {
+            margin-top: auto; /* Pousse le bouton vers le bas s'il y a une différence de hauteur */
+            display: inline-block;
+            width: 85%;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -112,7 +165,6 @@
     <nav class="navbar">
         <div class="logo">Smartech</div>
         
-        <!-- Bouton Burger -->
         <button class="menu-toggle" id="mobile-menu" aria-label="Ouvrir le menu">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -170,10 +222,10 @@
         </div>
     </section>
 
-    <!-- Section Offres (Placée correctement en dehors de la galerie) -->
-    <section class="pricing" id="prix">
+    <!-- Section Offres (Maintenant alignées et centrées) -->
+    <section class="pricing" id="prix" style="text-align: center; padding: 60px 0;">
         <h2>Nos Formules</h2>
-        <p class="subtitle">Choisissez la formule qui correspond à votre événement.</p>
+        <p class="subtitle" style="margin-bottom: 40px;">Choisissez la formule qui correspond à votre événement.</p>
 
         <div class="pricing-container">
             <!-- Basique -->
@@ -230,7 +282,6 @@
                     <li>✔ Statistiques des invités</li>
                     <li>✔ Support prioritaire</li>
                 </ul>
-                <!-- Correction du numéro ici (243 au lieu de 24) -->
                 <a href="https://wa.me/243829744248" target="_blank" class="btn-cta">Choisir cette offre</a>
             </div>
         </div>
@@ -290,4 +341,5 @@
         }
     </script>
 </body>
-</html>
+    </html>
+    

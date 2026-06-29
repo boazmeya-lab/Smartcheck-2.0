@@ -7,29 +7,96 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Importation d'une belle police moderne -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS intégré pour le défilement fluide et la pop-up */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Style de l'arrière-plan de la Pop-up (Masquée par défaut) */
+        .modale {
+            display: none; 
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Boîte blanche au centre */
+        .modale-content {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            width: 85%;
+            max-width: 380px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            color: #1a1a1a;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Bouton fermer (la croix X) */
+        .fermer {
+            position: absolute;
+            right: 18px;
+            top: 12px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.2s;
+        }
+        .fermer:hover {
+            color: #000;
+        }
+
+        /* Style du bouton "Obtenir l'info" (Noir et Doré) */
+        .btn-info {
+            display: block;
+            background: #111111;
+            color: #fcf6ba;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 2px solid #bf953f;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .btn-info:hover {
+            background: #bf953f;
+            color: #111111;
+            transform: translateY(-2px);
+        }
+        
+        /* Curseur pour indiquer que les cartes sont cliquables */
+        .card {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Barre de navigation -->
-<nav class="navbar">
-    <div class="logo">Smartech</div>
-    
-    <!-- Bouton Burger (invisible sur PC, visible sur Mobile) -->
-    <button class="menu-toggle" id="mobile-menu" aria-label="Ouvrir le menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-    </button>
-
-    <ul class="nav-links" id="nav-links">
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#prix">Prix</a></li>
-        <li><a href="#parametres">Paramètres</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</nav>
+    <!-- Barre de navigation (Doublons nettoyés) -->
+    <nav class="navbar">
         <div class="logo">Smartech</div>
-        <ul class="nav-links">
+        
+        <!-- Bouton Burger (invisible sur PC, visible sur Mobile) -->
+        <button class="menu-toggle" id="mobile-menu" aria-label="Ouvrir le menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <ul class="nav-links" id="nav-links">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#prix">Prix</a></li>
             <li><a href="#parametres">Paramètres</a></li>
@@ -40,28 +107,25 @@
     <!-- Section Principale (Hero) -->
     <header class="hero" id="home">
         <div class="hero-content">
-    <h1>votre site de mariage en ligne</h1>
-
-    <p>
-        Organisez vos mariages, conférences et événements avec
-        des invitations numériques, des QR Codes, un scanner
-        intelligent et une assistance par IA.
-    </p>
-
-    <a href="create.html" class="btn-cta">
-        Créer votre site
-    </a>
-</div>
+            <h1>Votre site de mariage en ligne</h1>
+            <p>
+                Organisez vos mariages, conférences et événements avec
+                des invitations numériques, des QR Codes, un scanner
+                intelligent et une assistance par IA.
+            </p>
+            <!-- Bouton unique et propre pour descendre aux modèles -->
+            <a href="#selection-model" class="btn-cta">Créer votre site</a>
+        </div>
     </header>
 
     <!-- Section Galerie / Illustrations -->
-    <section class="gallery-section">
+    <section class="gallery-section" id="selection-model">
         <h2>Nos réalisations & Modèles de Mariage</h2>
         <p class="subtitle">Des designs raffinés pour des moments inoubliables</p>
         
         <div class="grid-illustrations">
-            <!-- Carte Illustration 1 -->
-            <div class="card">
+            <!-- Carte Illustration 1 (Modèle Éternel) -->
+            <div class="card" onclick="ouvrirModale('Éternel')">
                 <div class="card-image-placeholder">
                     <span>Illustration Site Mariage Unique</span>
                 </div>
@@ -71,8 +135,8 @@
                 </div>
             </div>
 
-            <!-- Carte Illustration 2 -->
-            <div class="card">
+            <!-- Carte Illustration 2 (Modèle Bohème) -->
+            <div class="card" onclick="ouvrirModale('Bohème')">
                 <div class="card-image-placeholder">
                     <span>Illustration Site Mariage Bohème</span>
                 </div>
@@ -84,20 +148,59 @@
         </div>
     </section>
 
+    <!-- FENÊTRE POP-UP (MODALE) CACHÉE AU DÉBUT -->
+    <div id="maModale" class="modale">
+        <div class="modale-content">
+            <span class="fermer" onclick="fermerModale()">&times;</span>
+            <h3 id="modale-titre">Nom du Modèle</h3>
+            
+            <div id="modale-preview" style="background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #aa771c 100%); height: 150px; border-radius: 8px; margin: 15px 0; display: flex; justify-content: center; align-items: center; color: #000; font-weight: bold;">
+                Aperçu du site
+            </div>
+            
+            <a id="btn-whatsapp" href="#" target="_blank" class="btn-info">Obtenir l'info</a>
+        </div>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script>
+        // Gestion du menu Mobile
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Gestion de la Pop-up et redirection WhatsApp
+        function ouvrirModale(nomModele) {
+            document.getElementById('modale-titre').innerText = 'Modèle "' + nomModele + '"';
+            
+            // ⚠️ REMPLACE PAR TON VRAI NUMÉRO ICI (Ex: 243... pour la RDC)
+            var monNumero = "243829744248" 
+            var message = "Bonjour Smartech, je souhaite obtenir l'info pour le modèle " + nomModele;
+            var lienWhatsApp = "https://wa.me/" + monNumero + "?text=" + encodeURIComponent(message);
+            
+            document.getElementById('btn-whatsapp').href = lienWhatsApp;
+            document.getElementById('maModale').style.display = 'flex';
+        }
+
+        function fermerModale() {
+            document.getElementById('maModale').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            var modale = document.getElementById('maModale');
+            if (event.target == modale) {
+                modale.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
-<script>
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navLinks = document.getElementById('nav-links');
-
-    mobileMenu.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-
-    // Optionnel : Ferme le menu automatiquement quand on clique sur un lien
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-        });
-    });
-    </script>

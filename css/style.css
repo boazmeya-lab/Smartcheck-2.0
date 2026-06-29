@@ -33,3 +33,41 @@ button{
 button:hover{
     background:white;
 }
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 60px;
+    background:#111827;
+}
+
+.logo{
+    font-size:30px;
+    color:#00d9ff;
+    font-weight:bold;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+}
+
+.hero{
+    margin-top:120px;
+}
+
+button{
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 30px #00d9ff;
+}

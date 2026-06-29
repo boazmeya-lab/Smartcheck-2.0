@@ -11,7 +11,23 @@
 <body>
 
     <!-- Barre de navigation -->
-    <nav class="navbar">
+<nav class="navbar">
+    <div class="logo">Smartech</div>
+    
+    <!-- Bouton Burger (invisible sur PC, visible sur Mobile) -->
+    <button class="menu-toggle" id="mobile-menu" aria-label="Ouvrir le menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#prix">Prix</a></li>
+        <li><a href="#parametres">Paramètres</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
         <div class="logo">Smartech</div>
         <ul class="nav-links">
             <li><a href="#home" class="active">Home</a></li>

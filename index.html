@@ -81,15 +81,38 @@
         .card {
             cursor: pointer;
         }
+
+        /* AJOUT : Styles pour l'affichage correct des réductions de prix */
+        .price {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 15px 0;
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: #888888;
+            font-size: 16px;
+        }
+        .new-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: #111111;
+            margin: 5px 0;
+        }
+        .price small {
+            color: #e67e22;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Barre de navigation (Doublons nettoyés) -->
+    <!-- Barre de navigation -->
     <nav class="navbar">
         <div class="logo">Smartech</div>
         
-        <!-- Bouton Burger (invisible sur PC, visible sur Mobile) -->
+        <!-- Bouton Burger -->
         <button class="menu-toggle" id="mobile-menu" aria-label="Ouvrir le menu">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -98,8 +121,8 @@
 
         <ul class="nav-links" id="nav-links">
             <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#selection-model">Modèles</a></li>
             <li><a href="#prix">Prix</a></li>
-            <li><a href="#parametres">Paramètres</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -113,7 +136,6 @@
                 des invitations numériques, des QR Codes, un scanner
                 intelligent et une assistance par IA.
             </p>
-            <!-- Bouton unique et propre pour descendre aux modèles -->
             <a href="#selection-model" class="btn-cta">Créer votre site</a>
         </div>
     </header>
@@ -134,89 +156,6 @@
                     <p>Design épuré, galerie photo interactive et liste de mariage en ligne.</p>
                 </div>
             </div>
-            <!-- Section Offres -->
-<section class="pricing" id="prix">
-    <h2>Nos Formules</h2>
-    <p class="subtitle">Choisissez la formule qui correspond à votre événement.</p>
-
-    <div class="pricing-container">
-
-        <!-- Basique -->
-        <div class="price-card">
-            <h3>🌿 Basique</h3>
-            <div class="price">
-                <span class="old-price">59 $</span>
-                <span class="new-price">53 $</span>
-                <small>-10% Offre de lancement</small>
-            </div>
-
-            <ul>
-                <li>✔ Site de mariage personnalisé</li>
-                <li>✔ Gestion des invités</li>
-                <li>✔ Liste des invités (Google Sheets)</li>
-                <li>✔ Confirmation de présence (RSVP)</li>
-            </ul>
-
-            <a href="https://wa.me/243829744248" target="_blank" class="btn-cta">
-    Choisir cette offre
-            
-        </div>
-
-        <!-- Standard -->
-        <div class="price-card popular">
-            <span class="badge">Le plus populaire</span>
-
-            <h3>⭐ Standard</h3>
-
-            <div class="price">
-                <span class="old-price">119 $</span>
-                <span class="new-price">107 $</span>
-                <small>-10% Offre de lancement</small>
-            </div>
-
-            <ul>
-                <li>✔ Tout de la formule Basique</li>
-                <li>✔ QR Code pour chaque invité</li>
-                <li>✔ Envoi automatique des invitations</li>
-                <li>✔ Scan avec SmartCheck</li>
-                <li>✔ Suivi des invités présents</li>
-            </ul>
-
-                <a href="https://wa.me/243829744248" target="_blank" class="btn-cta">
-    Choisir cette offre
-</a>
-    
-        </div>
-
-        <!-- Premium -->
-        <div class="price-card premium">
-            <h3>💎 Premium</h3>
-
-            <div class="price">
-                <span class="old-price">179 $</span>
-                <span class="new-price">161 $</span>
-                <small>-10% Offre de lancement</small>
-            </div>
-
-            <ul>
-                <li>✔ Tout de la formule Standard</li>
-                <li>✔ Rappel automatique avant le mariage</li>
-                <li>✔ Rappel le jour du mariage</li>
-                <li>✔ Confirmation de présence</li>
-                <li>✔ Notifications aux mariés</li>
-                <li>✔ Tableau de bord en temps réel</li>
-                <li>✔ Statistiques des invités</li>
-                <li>✔ Support prioritaire</li>
-            </ul>
-
-            <a href="https://wa.me/24829744248" target="_blank" class="btn-cta">
-    Choisir cette offre
-</a>
-
-        </div>
-
-    </div>
-</section>
 
             <!-- Carte Illustration 2 (Modèle Bohème) -->
             <div class="card" onclick="ouvrirModale('Bohème')">
@@ -231,7 +170,73 @@
         </div>
     </section>
 
-    <!-- FENÊTRE POP-UP (MODALE) CACHÉE AU DÉBUT -->
+    <!-- Section Offres (Placée correctement en dehors de la galerie) -->
+    <section class="pricing" id="prix">
+        <h2>Nos Formules</h2>
+        <p class="subtitle">Choisissez la formule qui correspond à votre événement.</p>
+
+        <div class="pricing-container">
+            <!-- Basique -->
+            <div class="price-card">
+                <h3>🌿 Basique</h3>
+                <div class="price">
+                    <span class="old-price">59 $</span>
+                    <span class="new-price">53 $</span>
+                    <small>-10% Offre de lancement</small>
+                </div>
+                <ul>
+                    <li>✔ Site de mariage personnalisé</li>
+                    <li>✔ Gestion des invités</li>
+                    <li>✔ Liste des invités (Google Sheets)</li>
+                    <li>✔ Confirmation de présence (RSVP)</li>
+                </ul>
+                <a href="https://wa.me/243829744248" target="_blank" class="btn-cta">Choisir cette offre</a>
+            </div>
+
+            <!-- Standard -->
+            <div class="price-card popular">
+                <span class="badge">Le plus populaire</span>
+                <h3>⭐ Standard</h3>
+                <div class="price">
+                    <span class="old-price">119 $</span>
+                    <span class="new-price">107 $</span>
+                    <small>-10% Offre de lancement</small>
+                </div>
+                <ul>
+                    <li>✔ Tout de la formule Basique</li>
+                    <li>✔ QR Code pour chaque invité</li>
+                    <li>✔ Envoi automatique des invitations</li>
+                    <li>✔ Scan avec SmartCheck</li>
+                    <li>✔ Suivi des invités présents</li>
+                </ul>
+                <a href="https://wa.me/243829744248" target="_blank" class="btn-cta">Choisir cette offre</a>
+            </div>
+
+            <!-- Premium -->
+            <div class="price-card premium">
+                <h3>💎 Premium</h3>
+                <div class="price">
+                    <span class="old-price">179 $</span>
+                    <span class="new-price">161 $</span>
+                    <small>-10% Offre de lancement</small>
+                </div>
+                <ul>
+                    <li>✔ Tout de la formule Standard</li>
+                    <li>✔ Rappel automatique avant le mariage</li>
+                    <li>✔ Rappel le jour du mariage</li>
+                    <li>✔ Confirmation de présence</li>
+                    <li>✔ Notifications aux mariés</li>
+                    <li>✔ Tableau de bord en temps réel</li>
+                    <li>✔ Statistiques des invités</li>
+                    <li>✔ Support prioritaire</li>
+                </ul>
+                <!-- Correction du numéro ici (243 au lieu de 24) -->
+                <a href="https://wa.me/243829744248" target="_blank" class="btn-cta">Choisir cette offre</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FENÊTRE POP-UP (MODALE) -->
     <div id="maModale" class="modale">
         <div class="modale-content">
             <span class="fermer" onclick="fermerModale()">&times;</span>
@@ -265,7 +270,6 @@
         function ouvrirModale(nomModele) {
             document.getElementById('modale-titre').innerText = 'Modèle "' + nomModele + '"';
             
-            // ⚠️ REMPLACE PAR TON VRAI NUMÉRO ICI (Ex: 243... pour la RDC)
             var monNumero = "243829744248" 
             var message = "Bonjour Smartech, je souhaite obtenir l'info pour le modèle " + nomModele;
             var lienWhatsApp = "https://wa.me/" + monNumero + "?text=" + encodeURIComponent(message);

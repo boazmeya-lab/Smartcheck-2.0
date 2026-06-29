@@ -3,40 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCheck 2.0</title>
-
-    <link rel="stylesheet" href="css/style.css">
+    <title>Smartech - Créez votre site web</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Importation d'une belle police moderne -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+        <div class="logo">Smartech</div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#prix">Prix</a></li>
+            <li><a href="#parametres">Paramètres</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
+    <!-- Section Principale (Hero) -->
+    <header class="hero" id="home">
+        <div class="hero-content">
+    <h1>La plateforme intelligente pour gérer vos événements</h1>
 
-<nav>
-    <div class="logo">SmartCheck</div>
+    <p>
+        Organisez vos mariages, conférences et événements avec
+        des invitations numériques, des QR Codes, un scanner
+        intelligent et une assistance par IA.
+    </p>
 
-    <ul>
-        <li><a href="#">Accueil</a></li>
-        <li><a href="#">Fonctionnalités</a></li>
-        <li><a href="#">Tarifs</a></li>
-        <li><a href="login.html">Connexion</a></li>
-    </ul>
-</nav>
-<section class="features">
+    <a href="create.html" class="btn-cta">
+        Créer un événement
+    </a>
+</div>
+    </header>
 
-    <div class="card">
-        <h2>📅 Gestion des événements</h2>
-        <p>Créez et gérez facilement vos mariages, conférences et événements.</p>
-    </div>
+    <!-- Section Galerie / Illustrations -->
+    <section class="gallery-section">
+        <h2>Nos réalisations & Modèles de Mariage</h2>
+        <p class="subtitle">Des designs raffinés pour des moments inoubliables</p>
+        
+        <div class="grid-illustrations">
+            <!-- Carte Illustration 1 -->
+            <div class="card">
+                <div class="card-image-placeholder">
+                    <span>Illustration Site Mariage Unique</span>
+                </div>
+                <div class="card-info">
+                    <h3>Modèle "Éternel"</h3>
+                    <p>Design épuré, galerie photo interactive et liste de mariage en ligne.</p>
+                </div>
+            </div>
 
-    <div class="card">
-        <h2>📷 QR Code</h2>
-        <p>Scannez les invités et contrôlez les accès en temps réel.</p>
-    </div>
+            <!-- Carte Illustration 2 -->
+            <div class="card">
+                <div class="card-image-placeholder">
+                    <span>Illustration Site Mariage Bohème</span>
+                </div>
+                <div class="card-info">
+                    <h3>Modèle "Bohème"</h3>
+                    <p>Couleurs chaudes, RSVP intégré et fil d'actualité pour les invités.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="card">
-        <h2>🤖 Intelligence Artificielle</h2>
-        <p>L'IA aide à organiser, automatiser et analyser vos événements.</p>
-    </div>
-
-</section>
+</body>
+</html>

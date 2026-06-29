@@ -71,3 +71,32 @@ button:hover{
     transform:scale(1.05);
     box-shadow:0 0 30px #00d9ff;
 }
+.features{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    margin-top:80px;
+}
+
+.card{
+    width:300px;
+    background:#1a1a1a;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(0,255,255,.2);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 30px cyan;
+}
+
+.card h2{
+    color:#00ffff;
+}
+
+.card p{
+    color:#ccc;
+}

@@ -8,13 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        /* CSS intégré pour le défilement fluide, la pop-up, et le style global */
-        
-        /* Reset de base pour la cohérence */
+        /* --- RESET GLOBAL & CORRECTION --- */
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-radius;
+            box-sizing: border-box; /* Corrigé ici ! */
             font-family: 'Inter', sans-serif;
         }
 
@@ -28,7 +26,7 @@
             line-height: 1.6;
         }
 
-        /* --- Barre de navigation --- */
+        /* --- BARRE DE NAVIGATION --- */
         .navbar {
             background-color: #ffffff;
             padding: 15px 30px;
@@ -79,9 +77,9 @@
             background-color: #333;
         }
 
-        /* --- Section Principale (Hero) --- */
+        /* --- SECTION HERO --- */
         .hero {
-            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('images/hero-bg.jpg'); /* Exemple d'image de fond */
+            background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('images/hero-bg.jpg');
             background-size: cover;
             background-position: center;
             padding: 100px 20px;
@@ -94,7 +92,7 @@
         }
 
         .hero h1 {
-            font-size: 48px;
+            font-size: 44px;
             font-weight: 800;
             color: #111;
             margin-bottom: 20px;
@@ -106,23 +104,7 @@
             margin-bottom: 30px;
         }
 
-        .btn-cta {
-            display: inline-block;
-            background: #111;
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.2s, transform 0.2s;
-        }
-
-        .btn-cta:hover {
-            background: #333;
-            transform: translateY(-2px);
-        }
-
-        /* --- Section Galerie / Illustrations --- */
+        /* --- GALERIE / CARTES --- */
         .gallery-section {
             padding: 80px 20px;
             text-align: center;
@@ -141,8 +123,10 @@
         }
 
         .grid-illustrations {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
@@ -151,10 +135,13 @@
         .card {
             background: #ffffff;
             border-radius: 16px;
-            overflow: hidden; /* Pour que l'image ne dépasse pas des coins arrondis */
+            overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            width: 100%;
+            max-width: 340px;
+            text-align: left;
         }
 
         .card:hover {
@@ -162,21 +149,38 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
-        /* --- AJOUT DES IMAGES ICI --- */
         .card-image-placeholder {
-            height: 200px;
+            height: 220px;
             background-size: cover;
             background-position: center;
-            /* Placeholder par défaut au cas où l'image ne charge pas */
             background-color: #eaeaea; 
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #888;
-            font-weight: bold;
         }
 
-        /* --- Style de l'arrière-plan de la Pop-up (Masquée par défaut) --- */
+        .placeholder-text {
+            color: #888;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .card-info {
+            padding: 20px;
+        }
+
+        .card-info h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #111;
+        }
+
+        .card-info p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* --- POP-UP (MODALE) --- */
         .modale {
             display: none; 
             position: fixed;
@@ -190,7 +194,6 @@
             align-items: center;
         }
 
-        /* Boîte blanche au centre */
         .modale-content {
             background-color: #ffffff;
             padding: 25px;
@@ -201,10 +204,8 @@
             position: relative;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             color: #1a1a1a;
-            font-family: 'Inter', sans-serif;
         }
 
-        /* Bouton fermer (la croix X) */
         .fermer {
             position: absolute;
             right: 18px;
@@ -219,7 +220,6 @@
             color: #000;
         }
 
-        /* Style du bouton "Obtenir l'info" / "Visiter" (Noir et Doré) */
         .btn-info {
             display: block;
             background: #111111;
@@ -238,11 +238,84 @@
             color: #111111;
             transform: translateY(-2px);
         }
-        
-        /* --- Section Offres (Version Aérée) --- */
-        .pricing {
-            background-color: #fff;
-            padding: 80px 20px;
+
+        /* --- TARIFS / PRIX --- */
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 45px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            text-align: center;  
+            padding: 40px 30px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            width: 100%;
+            max-width: 340px;
+        }
+
+        .price {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: #888888;
+            font-size: 16px;
+        }
+        .new-price {
+            font-size: 32px;
+            font-weight: 800;
+            color: #111111;
+            margin: 8px 0;
+        }
+        .price small {
+            color: #e67e22;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .price-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+            text-align: left; 
+            width: 100%;
+            max-width: 260px; 
+        }
+
+        .price-card ul li {
+            margin-bottom: 16px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            width: 90%;
+            text-align: center;
+            padding: 14px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #111;
+            color: #fff;
+            transition: background 0.2s;
+        }
+        .btn-cta:hover {
+            background: #333;
         }
 
         .price-card.popular {
@@ -260,10 +333,6 @@
             font-weight: bold;
             font-size: 12px;
         }
-
-        .price-card.premium h3 {
-            color: #aa771c;
-        }
     </style>
 </head>
 <body>
@@ -271,45 +340,31 @@
     <!-- Barre de navigation -->
     <nav class="navbar">
         <div class="logo">Smartech</div>
-        
-        <button class="menu-toggle" id="mobile-menu" aria-label="Ouvrir le menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </button>
-
         <ul class="nav-links" id="nav-links">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#selection-model">Modèles</a></li>
             <li><a href="#prix">Prix</a></li>
-            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
-    <!-- Section Principale (Hero) -->
+    <!-- Hero -->
     <header class="hero" id="home">
         <div class="hero-content">
             <h1>Votre site de mariage en ligne</h1>
-            <p>
-                Organisez vos mariages, conférences et événements avec
-                des invitations numériques, des QR Codes, un scanner
-                intelligent et une assistance par IA.
-            </p>
+            <p>Organisez vos événements avec des invitations numériques, QR Codes et suivi en temps réel.</p>
             <a href="#selection-model" class="btn-cta">Créer votre site</a>
         </div>
     </header>
 
-    <!-- Section Galerie / Illustrations -->
+    <!-- Modèles -->
     <section class="gallery-section" id="selection-model">
-        <h2>Nos réalisations & Modèles de Mariage</h2>
+        <h2>Nos réalisations & Modèles</h2>
         <p class="subtitle">Des designs raffinés pour des moments inoubliables</p>
         
         <div class="grid-illustrations">
             <div class="card" onclick="ouvrirModale('Éternel')">
-                <!-- AJOUT DE L'IMAGE POUR LE MODÈLE ÉTERNEL -->
                 <div class="card-image-placeholder" style="background-image: url('images/modele-eternel.jpg');">
-                    <!-- Texte affiché uniquement si l'image ne charge pas -->
-                    <span class="placeholder-text">Modele Éternel</span> 
+                    <span class="placeholder-text">Aperçu indisponible</span> 
                 </div>
                 <div class="card-info">
                     <h3>Modèle "Éternel"</h3>
@@ -318,10 +373,8 @@
             </div>
 
             <div class="card" onclick="ouvrirModale('Bohème')">
-                <!-- AJOUT DE L'IMAGE POUR LE MODÈLE BOHÈME -->
                 <div class="card-image-placeholder" style="background-image: url('images/modele-boheme.jpg');">
-                    <!-- Texte affiché uniquement si l'image ne charge pas -->
-                    <span class="placeholder-text">Modele Bohème</span>
+                    <span class="placeholder-text">Aperçu indisponible</span>
                 </div>
                 <div class="card-info">
                     <h3>Modèle "Bohème"</h3>
@@ -331,67 +384,35 @@
         </div>
     </section>
 
-    <!-- Section Offres (Version Aérée) -->
+    <!-- Tarifs -->
     <section class="pricing" id="prix" style="text-align: center; padding: 80px 0;">
         <h2>Nos Formules</h2>
-        <p class="subtitle" style="margin-bottom: 20px;">Choisissez la formule qui correspond à votre événement.</p>
-
         <div class="pricing-container">
-            <!-- Basique -->
             <div class="price-card">
                 <h3>🌿 Basique</h3>
                 <div class="price">
                     <span class="old-price">59 $</span>
                     <span class="new-price">53 $</span>
-                    <small>-10% Offre de lancement</small>
                 </div>
                 <ul>
-                    <li>✔ Site de mariage personnalisé</li>
-                    <li>✔ Gestion des invités</li>
-                    <li>✔ Liste des invités (Google Sheets)</li>
-                    <li>✔ Confirmation de présence (RSVP)</li>
+                    <li>✔ Site personnalisé</li>
+                    <li>✔ RSVP intégré</li>
                 </ul>
-                <a href="https://wa.me/243829744248?text=Bonjour%20Smartech%2C%20je%20souhaite%20me%20renseigner%20sur%20l%27offre%20Basique." target="_blank" class="btn-cta">Choisir cette offre</a>
+                <a href="https://wa.me/243829744248" target="_blank" class="btn-cta">Choisir cette offre</a>
             </div>
 
-            <!-- Standard -->
             <div class="price-card popular">
                 <span class="badge">Le plus populaire</span>
                 <h3>⭐ Standard</h3>
                 <div class="price">
                     <span class="old-price">119 $</span>
                     <span class="new-price">107 $</span>
-                    <small>-10% Offre de lancement</small>
                 </div>
                 <ul>
-                    <li>✔ Tout de la formule Basique</li>
-                    <li>✔ QR Code pour chaque invité</li>
-                    <li>✔ Envoi automatique des invitations</li>
-                    <li>✔ Scan avec SmartCheck</li>
-                    <li>✔ Suivi des invités présents</li>
+                    <li>✔ Tout du Basique</li>
+                    <li>✔ QR Code par invité</li>
                 </ul>
-                <a href="https://wa.me/243829744248?text=Bonjour%20Smartech%2C%20je%20souhaite%20me%20renseigner%20sur%20l%27offre%20Standard." target="_blank" class="btn-cta">Choisir cette offre</a>
-            </div>
-
-            <!-- Premium -->
-            <div class="price-card premium">
-                <h3>💎 Premium</h3>
-                <div class="price">
-                    <span class="old-price">179 $</span>
-                    <span class="new-price">161 $</span>
-                    <small>-10% Offre de lancement</small>
-                </div>
-                <ul>
-                    <li>✔ Tout de la formule Standard</li>
-                    <li>✔ Rappel automatique avant le mariage</li>
-                    <li>✔ Rappel le jour du mariage</li>
-                    <li>✔ Confirmation de présence</li>
-                    <li>✔ Notifications aux mariés</li>
-                    <li>✔ Tableau de bord en temps réel</li>
-                    <li>✔ Statistiques des invités</li>
-                    <li>✔ Support prioritaire</li>
-                </ul>
-                <a href="https://wa.me/243829744248?text=Bonjour%20Smartech%2C%20je%20souhaite%20me%20renseigner%20sur%20l%27offre%20Premium." target="_blank" class="btn-cta">Choisir cette offre</a>
+                <a href="https://wa.me/243829744248" target="_blank" class="btn-cta">Choisir cette offre</a>
             </div>
         </div>
     </section>
@@ -401,40 +422,31 @@
         <div class="modale-content">
             <span class="fermer" onclick="fermerModale()">&times;</span>
             <h3 id="modale-titre">Nom du Modèle</h3>
-            
             <div id="modale-preview" style="background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #aa771c 100%); height: 150px; border-radius: 8px; margin: 15px 0; display: flex; justify-content: center; align-items: center; color: #000; font-weight: bold;">
                 Aperçu du site
             </div>
-            
             <a id="btn-whatsapp" href="#" target="_blank" class="btn-info">Obtenir l'info</a>
         </div>
     </div>
 
-    <!-- Scripts JavaScript -->
+    <!-- JavaScript -->
     <script>
-        // Gestion du menu Mobile
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.getElementById('nav-links');
-
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Gestion de la Pop-up et redirection WhatsApp
         function ouvrirModale(nomModele) {
-            document.getElementById('modale-titre').innerText = 'Modèle "' + nomModele + '"';
+            const titreModale = document.getElementById('modale-titre');
+            const boutonAction = document.getElementById('btn-whatsapp');
             
-            var monNumero = "243829744248" 
-            var message = "Bonjour Smartech, je souhaite obtenir l'info pour le modèle " + nomModele;
-            var lienWhatsApp = "https://wa.me/" + monNumero + "?text=" + encodeURIComponent(message);
+            titreModale.innerText = 'Modèle "' + nomModele + '"';
             
-            document.getElementById('btn-whatsapp').href = lienWhatsApp;
+            if (nomModele === 'Éternel') {
+                boutonAction.innerText = "Visiter le site éternel";
+                boutonAction.href = "https://boazmeya-lab.github.io/Smartech-/";
+            } else {
+                boutonAction.innerText = "Obtenir l'info";
+                var monNumero = "243829744248";
+                var message = "Bonjour Smartech, je souhaite obtenir l'info pour le modèle " + nomModele;
+                boutonAction.href = "https://wa.me/" + monNumero + "?text=" + encodeURIComponent(message);
+            }
+            
             document.getElementById('maModale').style.display = 'flex';
         }
 

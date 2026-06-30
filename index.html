@@ -57,7 +57,7 @@
             color: #000;
         }
 
-        /* Style du bouton "Obtenir l'info" (Noir et Doré) */
+        /* Style du bouton "Obtenir l'info" / "Visiter" (Noir et Doré) */
         .btn-info {
             display: block;
             background: #111111;
@@ -87,7 +87,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 15px 0;
+            margin: 20px 0; /* Augmenté pour donner de l'air autour du prix */
         }
         .old-price {
             text-decoration: line-through;
@@ -95,63 +95,67 @@
             font-size: 16px;
         }
         .new-price {
-            font-size: 28px;
+            font-size: 32px; /* Légèrement plus grand pour ressortir */
             font-weight: 800;
             color: #111111;
-            margin: 5px 0;
+            margin: 8px 0;
         }
         .price small {
             color: #e67e22;
             font-weight: 600;
+            margin-top: 4px;
         }
 
-        /* Centrage complet des offres et des boutons */
+        /* AJUSTEMENT : Conteneur global plus aéré */
         .pricing-container {
             display: flex;
             justify-content: center;
             align-items: stretch;
             flex-wrap: wrap;
-            gap: 30px;
-            padding: 20px;
+            gap: 45px; /* Augmenté l'espace ENTRE les cartes (avant c'était 30px) */
+            padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
+        /* AJUSTEMENT : Cartes plus larges et spacieuses */
         .price-card {
             display: flex;
             flex-direction: column;
             align-items: center; 
             text-align: center;  
-            padding: 30px 20px;
+            padding: 40px 30px; /* Augmenté l'espace INTERNE de la carte */
             background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 20px; /* Bordures un poil plus douces */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06); /* Ombre plus diffuse et premium */
             width: 100%;
-            max-width: 320px;
+            max-width: 340px; /* Légèrement élargie pour ne pas serrer le texte */
         }
 
+        /* AJUSTEMENT : Liste des avantages bien aérée */
         .price-card ul {
             list-style: none;
             padding: 0;
-            margin: 20px 0;
+            margin: 30px 0; /* Plus d'espace au-dessus et en dessous de la liste */
             text-align: left; 
             width: 100%;
-            max-width: 240px; 
+            max-width: 260px; 
         }
 
         .price-card ul li {
-            margin-bottom: 10px;
-            font-size: 14px;
-            line-height: 1.4;
+            margin-bottom: 16px; /* Plus d'espace entre chaque avantage */
+            font-size: 15px; /* Un poil plus lisible */
+            line-height: 1.5;
         }
 
+        /* Ajustement du bouton de sélection */
         .price-card .btn-cta {
             margin-top: auto; 
             display: inline-block;
-            width: 85%;
+            width: 90%;
             text-align: center;
-            padding: 12px 20px;
-            border-radius: 8px;
+            padding: 14px 20px; /* Bouton plus haut, plus moderne */
+            border-radius: 10px;
             text-decoration: none;
             font-weight: bold;
         }
@@ -218,10 +222,10 @@
         </div>
     </section>
 
-    <!-- Section Offres -->
-    <section class="pricing" id="prix" style="text-align: center; padding: 60px 0;">
+    <!-- Section Offres (Version Aérée) -->
+    <section class="pricing" id="prix" style="text-align: center; padding: 80px 0;">
         <h2>Nos Formules</h2>
-        <p class="subtitle" style="margin-bottom: 40px;">Choisissez la formule qui correspond à votre événement.</p>
+        <p class="subtitle" style="margin-bottom: 20px;">Choisissez la formule qui correspond à votre événement.</p>
 
         <div class="pricing-container">
             <!-- Basique -->
@@ -238,7 +242,6 @@
                     <li>✔ Liste des invités (Google Sheets)</li>
                     <li>✔ Confirmation de présence (RSVP)</li>
                 </ul>
-                <!-- Nouveau lien avec message personnalisé -->
                 <a href="https://wa.me/243829744248?text=Bonjour%20Smartech%2C%20je%20souhaite%20me%20renseigner%20sur%20l%27offre%20Basique." target="_blank" class="btn-cta">Choisir cette offre</a>
             </div>
 
@@ -258,7 +261,6 @@
                     <li>✔ Scan avec SmartCheck</li>
                     <li>✔ Suivi des invités présents</li>
                 </ul>
-                <!-- Nouveau lien avec message personnalisé -->
                 <a href="https://wa.me/243829744248?text=Bonjour%20Smartech%2C%20je%20souhaite%20me%20renseigner%20sur%20l%27offre%20Standard." target="_blank" class="btn-cta">Choisir cette offre</a>
             </div>
 
@@ -280,7 +282,6 @@
                     <li>✔ Statistiques des invités</li>
                     <li>✔ Support prioritaire</li>
                 </ul>
-                <!-- Nouveau lien avec message personnalisé -->
                 <a href="https://wa.me/243829744248?text=Bonjour%20Smartech%2C%20je%20souhaite%20me%20renseigner%20sur%20l%27offre%20Premium." target="_blank" class="btn-cta">Choisir cette offre</a>
             </div>
         </div>
@@ -316,15 +317,25 @@
             });
         });
 
-        // Gestion de la Pop-up et redirection WhatsApp
+        // Gestion de la Pop-up et redirection dynamique
         function ouvrirModale(nomModele) {
-            document.getElementById('modale-titre').innerText = 'Modèle "' + nomModele + '"';
+            const titreModale = document.getElementById('modale-titre');
+            const boutonAction = document.getElementById('btn-whatsapp');
             
-            var monNumero = "243829744248" 
-            var message = "Bonjour Smartech, je souhaite obtenir l'info pour le modèle " + nomModele;
-            var lienWhatsApp = "https://wa.me/" + monNumero + "?text=" + encodeURIComponent(message);
+            titreModale.innerText = 'Modèle "' + nomModele + '"';
             
-            document.getElementById('btn-whatsapp').href = lienWhatsApp;
+            if (nomModele === 'Éternel') {
+                // Comportement spécifique pour le modèle Éternel
+                boutonAction.innerText = "Visiter le site éternel";
+                boutonAction.href = "https://boazmeya-lab.github.io/Smartech-/";
+            } else {
+                // Comportement par défaut (ex: Bohème) -> Redirection WhatsApp
+                boutonAction.innerText = "Obtenir l'info";
+                var monNumero = "243829744248";
+                var message = "Bonjour Smartech, je souhaite obtenir l'info pour le modèle " + nomModele;
+                boutonAction.href = "https://wa.me/" + monNumero + "?text=" + encodeURIComponent(message);
+            }
+            
             document.getElementById('maModale').style.display = 'flex';
         }
 
@@ -340,5 +351,4 @@
         }
     </script>
 </body>
-                </html>
-            
+</html>

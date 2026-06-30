@@ -4,17 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smartech - Créez votre site web</title>
-    <link rel="stylesheet" href="css/style.css">
     <!-- Importation d'une belle police moderne -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        /* CSS intégré pour le défilement fluide et la pop-up */
+        /* CSS intégré pour le défilement fluide, la pop-up, et le style global */
+        
+        /* Reset de base pour la cohérence */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-radius;
+            font-family: 'Inter', sans-serif;
+        }
+
         html {
             scroll-behavior: smooth;
         }
 
-        /* Style de l'arrière-plan de la Pop-up (Masquée par défaut) */
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* --- Barre de navigation --- */
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #111;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #000;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: #333;
+        }
+
+        /* --- Section Principale (Hero) --- */
+        .hero {
+            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('images/hero-bg.jpg'); /* Exemple d'image de fond */
+            background-size: cover;
+            background-position: center;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            background: #111;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn-cta:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        /* --- Section Galerie / Illustrations --- */
+        .gallery-section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .gallery-section h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 50px;
+        }
+
+        .grid-illustrations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden; /* Pour que l'image ne dépasse pas des coins arrondis */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        /* --- AJOUT DES IMAGES ICI --- */
+        .card-image-placeholder {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            /* Placeholder par défaut au cas où l'image ne charge pas */
+            background-color: #eaeaea; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #888;
+            font-weight: bold;
+        }
+
+        /* --- Style de l'arrière-plan de la Pop-up (Masquée par défaut) --- */
         .modale {
             display: none; 
             position: fixed;
@@ -77,87 +239,30 @@
             transform: translateY(-2px);
         }
         
-        /* Curseur pour indiquer que les cartes sont cliquables */
-        .card {
-            cursor: pointer;
+        /* --- Section Offres (Version Aérée) --- */
+        .pricing {
+            background-color: #fff;
+            padding: 80px 20px;
         }
 
-        /* Styles pour l'affichage correct des réductions de prix */
-        .price {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px 0; /* Augmenté pour donner de l'air autour du prix */
-        }
-        .old-price {
-            text-decoration: line-through;
-            color: #888888;
-            font-size: 16px;
-        }
-        .new-price {
-            font-size: 32px; /* Légèrement plus grand pour ressortir */
-            font-weight: 800;
-            color: #111111;
-            margin: 8px 0;
-        }
-        .price small {
-            color: #e67e22;
-            font-weight: 600;
-            margin-top: 4px;
+        .price-card.popular {
+            border: 2px solid #bf953f;
+            position: relative;
         }
 
-        /* AJUSTEMENT : Conteneur global plus aéré */
-        .pricing-container {
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            flex-wrap: wrap;
-            gap: 45px; /* Augmenté l'espace ENTRE les cartes (avant c'était 30px) */
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* AJUSTEMENT : Cartes plus larges et spacieuses */
-        .price-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-            text-align: center;  
-            padding: 40px 30px; /* Augmenté l'espace INTERNE de la carte */
-            background: #ffffff;
-            border-radius: 20px; /* Bordures un poil plus douces */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06); /* Ombre plus diffuse et premium */
-            width: 100%;
-            max-width: 340px; /* Légèrement élargie pour ne pas serrer le texte */
-        }
-
-        /* AJUSTEMENT : Liste des avantages bien aérée */
-        .price-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 30px 0; /* Plus d'espace au-dessus et en dessous de la liste */
-            text-align: left; 
-            width: 100%;
-            max-width: 260px; 
-        }
-
-        .price-card ul li {
-            margin-bottom: 16px; /* Plus d'espace entre chaque avantage */
-            font-size: 15px; /* Un poil plus lisible */
-            line-height: 1.5;
-        }
-
-        /* Ajustement du bouton de sélection */
-        .price-card .btn-cta {
-            margin-top: auto; 
-            display: inline-block;
-            width: 90%;
-            text-align: center;
-            padding: 14px 20px; /* Bouton plus haut, plus moderne */
-            border-radius: 10px;
-            text-decoration: none;
+        .price-card.popular .badge {
+            position: absolute;
+            top: -15px;
+            background-color: #bf953f;
+            color: #111;
+            padding: 5px 10px;
+            border-radius: 20px;
             font-weight: bold;
+            font-size: 12px;
+        }
+
+        .price-card.premium h3 {
+            color: #aa771c;
         }
     </style>
 </head>
@@ -201,8 +306,10 @@
         
         <div class="grid-illustrations">
             <div class="card" onclick="ouvrirModale('Éternel')">
-                <div class="card-image-placeholder">
-                    <span>Illustration Site Mariage Unique</span>
+                <!-- AJOUT DE L'IMAGE POUR LE MODÈLE ÉTERNEL -->
+                <div class="card-image-placeholder" style="background-image: url('images/modele-eternel.jpg');">
+                    <!-- Texte affiché uniquement si l'image ne charge pas -->
+                    <span class="placeholder-text">Modele Éternel</span> 
                 </div>
                 <div class="card-info">
                     <h3>Modèle "Éternel"</h3>
@@ -211,8 +318,10 @@
             </div>
 
             <div class="card" onclick="ouvrirModale('Bohème')">
-                <div class="card-image-placeholder">
-                    <span>Illustration Site Mariage Bohème</span>
+                <!-- AJOUT DE L'IMAGE POUR LE MODÈLE BOHÈME -->
+                <div class="card-image-placeholder" style="background-image: url('images/modele-boheme.jpg');">
+                    <!-- Texte affiché uniquement si l'image ne charge pas -->
+                    <span class="placeholder-text">Modele Bohème</span>
                 </div>
                 <div class="card-info">
                     <h3>Modèle "Bohème"</h3>
@@ -317,25 +426,15 @@
             });
         });
 
-        // Gestion de la Pop-up et redirection dynamique
+        // Gestion de la Pop-up et redirection WhatsApp
         function ouvrirModale(nomModele) {
-            const titreModale = document.getElementById('modale-titre');
-            const boutonAction = document.getElementById('btn-whatsapp');
+            document.getElementById('modale-titre').innerText = 'Modèle "' + nomModele + '"';
             
-            titreModale.innerText = 'Modèle "' + nomModele + '"';
+            var monNumero = "243829744248" 
+            var message = "Bonjour Smartech, je souhaite obtenir l'info pour le modèle " + nomModele;
+            var lienWhatsApp = "https://wa.me/" + monNumero + "?text=" + encodeURIComponent(message);
             
-            if (nomModele === 'Éternel') {
-                // Comportement spécifique pour le modèle Éternel
-                boutonAction.innerText = "Visiter le site éternel";
-                boutonAction.href = "https://boazmeya-lab.github.io/Smartech-/";
-            } else {
-                // Comportement par défaut (ex: Bohème) -> Redirection WhatsApp
-                boutonAction.innerText = "Obtenir l'info";
-                var monNumero = "243829744248";
-                var message = "Bonjour Smartech, je souhaite obtenir l'info pour le modèle " + nomModele;
-                boutonAction.href = "https://wa.me/" + monNumero + "?text=" + encodeURIComponent(message);
-            }
-            
+            document.getElementById('btn-whatsapp').href = lienWhatsApp;
             document.getElementById('maModale').style.display = 'flex';
         }
 

@@ -87,7 +87,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 20px 0; /* Augmenté pour donner de l'air autour du prix */
+            margin: 20px 0;
         }
         .old-price {
             text-decoration: line-through;
@@ -95,7 +95,7 @@
             font-size: 16px;
         }
         .new-price {
-            font-size: 32px; /* Légèrement plus grand pour ressortir */
+            font-size: 32px;
             font-weight: 800;
             color: #111111;
             margin: 8px 0;
@@ -106,63 +106,60 @@
             margin-top: 4px;
         }
 
-        /* AJUSTEMENT : Conteneur global plus aéré */
+        /* Conteneur global des prix plus aéré */
         .pricing-container {
             display: flex;
             justify-content: center;
             align-items: stretch;
             flex-wrap: wrap;
-            gap: 45px; /* Augmenté l'espace ENTRE les cartes (avant c'était 30px) */
+            gap: 45px;
             padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* AJUSTEMENT : Cartes plus larges et spacieuses */
+        /* Cartes de prix */
         .price-card {
             display: flex;
             flex-direction: column;
             align-items: center; 
             text-align: center;  
-            padding: 40px 30px; /* Augmenté l'espace INTERNE de la carte */
+            padding: 40px 30px;
             background: #ffffff;
-            border-radius: 20px; /* Bordures un poil plus douces */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06); /* Ombre plus diffuse et premium */
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
             width: 100%;
-            max-width: 340px; /* Légèrement élargie pour ne pas serrer le texte */
+            max-width: 340px;
         }
 
-        /* AJUSTEMENT : Liste des avantages bien aérée */
         .price-card ul {
             list-style: none;
             padding: 0;
-            margin: 30px 0; /* Plus d'espace au-dessus et en dessous de la liste */
+            margin: 30px 0;
             text-align: left; 
             width: 100%;
             max-width: 260px; 
         }
 
         .price-card ul li {
-            margin-bottom: 16px; /* Plus d'espace entre chaque avantage */
-            font-size: 15px; /* Un poil plus lisible */
+            margin-bottom: 16px;
+            font-size: 15px;
             line-height: 1.5;
         }
 
-        /* Ajustement du bouton de sélection */
         .price-card .btn-cta {
             margin-top: auto; 
             display: inline-block;
             width: 90%;
             text-align: center;
-            padding: 14px 20px; /* Bouton plus haut, plus moderne */
+            padding: 14px 20px;
             border-radius: 10px;
             text-decoration: none;
             font-weight: bold;
         }
 
-        /* --- NOUVEAU STYLE DU CARROUSEL DE MODÈLES --- */
+        /* --- STYLE DU CARROUSEL DE MODÈLES --- */
 
-        /* Conteneur global qui gère le centrage sur grand écran */
         .slider-wrapper {
             width: 100%;
             max-width: 1200px;
@@ -171,7 +168,6 @@
             padding: 20px 0;
         }
 
-        /* Conteneur de défilement horizontal */
         .slider-container {
             display: flex;
             gap: 20px;
@@ -179,21 +175,18 @@
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             padding: 10px 20px;
-            /* Cache la barre de défilement standard */
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE/Edge */
-            -webkit-overflow-scrolling: touch; /* iOS inertie de scroll */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            -webkit-overflow-scrolling: touch;
         }
 
-        /* Masque la scrollbar sur Chrome/Safari/Opera */
         .slider-container::-webkit-scrollbar {
             display: none;
         }
 
-        /* Cartes adaptées pour le défilement */
         .card-slider {
-            flex: 0 0 85%; /* Occupe 85% de la largeur sur mobile (laisse voir la suite) */
-            scroll-snap-align: center; /* Aligne la carte au centre lors du swipe */
+            flex: 0 0 85%;
+            scroll-snap-align: center;
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
@@ -201,10 +194,24 @@
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease;
-            position: relative; /* Nécessaire pour positionner le badge de réduction */
+            position: relative;
         }
 
-        /* Badge -10% de réduction au-dessus des cartes */
+        /* Style pour l'aperçu vidéo en haut de la carte */
+        .card-video-container {
+            width: 100%;
+            height: 220px; /* Hauteur fixe pour la zone vidéo */
+            position: relative;
+            overflow: hidden;
+            background: #111;
+        }
+
+        .card-video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Remplit parfaitement le carré sans déformer */
+        }
+
         .badge-reduction {
             position: absolute;
             top: 15px;
@@ -219,7 +226,11 @@
             z-index: 10;
         }
 
-        /* Petit bouton interactif au bas de chaque carte */
+        .card-info {
+            padding: 20px;
+            background: #ffffff;
+        }
+
         .btn-demo-flat {
             display: inline-block;
             margin-top: 15px;
@@ -228,8 +239,7 @@
             font-size: 14px;
         }
 
-        /* --- ADAPTATION GRAND ÉCRAN (Ordinateur) --- */
-        /* Quand l'écran est assez grand, on remet les cartes en ligne propre sans défilement */
+        /* --- ADAPTATION GRAND ÉCRAN --- */
         @media (min-width: 768px) {
             .slider-container {
                 overflow-x: visible;
@@ -267,7 +277,7 @@
         </ul>
     </nav>
 
-    <!-- Section Principale (Hero) -->
+    <!-- Section Hero -->
     <header class="hero" id="home">
         <div class="hero-content">
             <h1>Votre site de mariage en ligne</h1>
@@ -280,19 +290,22 @@
         </div>
     </header>
 
-    <!-- Section Galerie / Illustrations (Version Défilante avec Badges) -->
+    <!-- Section Galerie / Illustrations avec Vidéos et Badges -->
     <section class="gallery-section" id="selection-model">
         <h2>Nos réalisations & Modèles de Mariage</h2>
         <p class="subtitle">Des designs raffinés pour des moments inoubliables</p>
         
-        <!-- Conteneur principal du slider -->
         <div class="slider-wrapper">
             <div class="slider-container">
                 <!-- Modèle Éternel -->
                 <div class="card card-slider" onclick="ouvrirModale('Éternel')">
                     <span class="badge-reduction">-10% Promo</span>
-                    <div class="card-image-placeholder">
-                        <span>Illustration Site Mariage Unique</span>
+                    <div class="card-video-container">
+                        <!-- Vidéo d'aperçu pour Éternel -->
+                        <video autoplay loop muted playsinline>
+                            <source src="LIEN_DE_TA_VIDEO_ETERNEL.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas la vidéo.
+                        </video>
                     </div>
                     <div class="card-info">
                         <h3>Modèle "Éternel"</h3>
@@ -304,8 +317,12 @@
                 <!-- Modèle Bohème -->
                 <div class="card card-slider" onclick="ouvrirModale('Bohème')">
                     <span class="badge-reduction">-10% Promo</span>
-                    <div class="card-image-placeholder">
-                        <span>Illustration Site Mariage Bohème</span>
+                    <div class="card-video-container">
+                        <!-- Vidéo d'aperçu pour Bohème -->
+                        <video autoplay loop muted playsinline>
+                            <source src="LIEN_DE_TA_VIDEO_BOHEME.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas la vidéo.
+                        </video>
                     </div>
                     <div class="card-info">
                         <h3>Modèle "Bohème"</h3>
@@ -317,7 +334,7 @@
         </div>
     </section>
 
-    <!-- Section Offres (Version Aérée) -->
+    <!-- Section Tarifs -->
     <section class="pricing" id="prix" style="text-align: center; padding: 80px 0;">
         <h2>Nos Formules</h2>
         <p class="subtitle" style="margin-bottom: 20px;">Choisissez la formule qui correspond à votre événement.</p>
@@ -420,11 +437,9 @@
             titreModale.innerText = 'Modèle "' + nomModele + '"';
             
             if (nomModele === 'Éternel') {
-                // Nouvelle redirection pour le modèle Éternel
                 boutonAction.innerText = "Visiter le site éternel";
-                boutonAction.href = "https://invitation-demo.smartevent.site";
+                boutonAction.href = "https://invitation-demo.smartcheck.site";
             } else {
-                // Comportement par défaut (ex: Bohème) -> Redirection WhatsApp (Conserve le même lien d'origine)
                 boutonAction.innerText = "Obtenir l'info";
                 var monNumero = "243829744248";
                 var message = "Bonjour Smartech, je souhaite obtenir l'info pour le modèle " + nomModele;
@@ -446,4 +461,4 @@
         }
     </script>
 </body>
-                    </html>
+</html>

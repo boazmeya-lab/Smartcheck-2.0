@@ -200,7 +200,7 @@
         /* Style pour l'aperçu vidéo en haut de la carte */
         .card-video-container {
             width: 100%;
-            height: 220px; /* Hauteur fixe pour la zone vidéo */
+            height: 220px;
             position: relative;
             overflow: hidden;
             background: #111;
@@ -209,7 +209,7 @@
         .card-video-container video {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Remplit parfaitement le carré sans déformer */
+            object-fit: cover;
         }
 
         .badge-reduction {
@@ -301,9 +301,8 @@
                 <div class="card card-slider" onclick="ouvrirModale('Éternel')">
                     <span class="badge-reduction">-10% Promo</span>
                     <div class="card-video-container">
-                        <!-- Vidéo d'aperçu pour Éternel -->
                         <video autoplay loop muted playsinline>
-                            <source src="LIEN_DE_TA_VIDEO_ETERNEL.mp4" type="video/mp4">
+                            <source src="videos/eternel.mp4" type="video/mp4">
                             Votre navigateur ne supporte pas la vidéo.
                         </video>
                     </div>
@@ -318,9 +317,8 @@
                 <div class="card card-slider" onclick="ouvrirModale('Bohème')">
                     <span class="badge-reduction">-10% Promo</span>
                     <div class="card-video-container">
-                        <!-- Vidéo d'aperçu pour Bohème -->
                         <video autoplay loop muted playsinline>
-                            <source src="LIEN_DE_TA_VIDEO_BOHEME.mp4" type="video/mp4">
+                            <source src="videos/boheme.mp4" type="video/mp4">
                             Votre navigateur ne supporte pas la vidéo.
                         </video>
                     </div>
@@ -429,7 +427,7 @@
             });
         });
 
-        // Gestion de la Pop-up et redirection dynamique
+        // Gestion de la Pop-up et redirection dynamique corrigée
         function ouvrirModale(nomModele) {
             const titreModale = document.getElementById('modale-titre');
             const boutonAction = document.getElementById('btn-whatsapp');
@@ -438,7 +436,10 @@
             
             if (nomModele === 'Éternel') {
                 boutonAction.innerText = "Visiter le site éternel";
-                boutonAction.href = "https://invitation-demo.smartcheck.site";
+                boutonAction.href = "https://boazmeya-lab.github.io/Invitation-mariage-/";
+            } else if (nomModele === 'Bohème') {
+                boutonAction.innerText = "Visiter le site bohème";
+                boutonAction.href = "https://boazmeya-lab.github.io/Smartech-/";
             } else {
                 boutonAction.innerText = "Obtenir l'info";
                 var monNumero = "243829744248";

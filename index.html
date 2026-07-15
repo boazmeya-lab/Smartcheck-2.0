@@ -159,6 +159,92 @@
             text-decoration: none;
             font-weight: bold;
         }
+
+        /* --- NOUVEAU STYLE DU CARROUSEL DE MODÈLES --- */
+
+        /* Conteneur global qui gère le centrage sur grand écran */
+        .slider-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        /* Conteneur de défilement horizontal */
+        .slider-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 10px 20px;
+            /* Cache la barre de défilement standard */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+            -webkit-overflow-scrolling: touch; /* iOS inertie de scroll */
+        }
+
+        /* Masque la scrollbar sur Chrome/Safari/Opera */
+        .slider-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Cartes adaptées pour le défilement */
+        .card-slider {
+            flex: 0 0 85%; /* Occupe 85% de la largeur sur mobile (laisse voir la suite) */
+            scroll-snap-align: center; /* Aligne la carte au centre lors du swipe */
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            position: relative; /* Nécessaire pour positionner le badge de réduction */
+        }
+
+        /* Badge -10% de réduction au-dessus des cartes */
+        .badge-reduction {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 100%);
+            color: #111111;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+
+        /* Petit bouton interactif au bas de chaque carte */
+        .btn-demo-flat {
+            display: inline-block;
+            margin-top: 15px;
+            color: #bf953f;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* --- ADAPTATION GRAND ÉCRAN (Ordinateur) --- */
+        /* Quand l'écran est assez grand, on remet les cartes en ligne propre sans défilement */
+        @media (min-width: 768px) {
+            .slider-container {
+                overflow-x: visible;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                padding: 10px 0;
+            }
+            .card-slider {
+                flex: none;
+            }
+            .card-slider:hover {
+                transform: translateY(-5px);
+            }
+        }
     </style>
 </head>
 <body>
@@ -194,29 +280,38 @@
         </div>
     </header>
 
-    <!-- Section Galerie / Illustrations -->
+    <!-- Section Galerie / Illustrations (Version Défilante avec Badges) -->
     <section class="gallery-section" id="selection-model">
         <h2>Nos réalisations & Modèles de Mariage</h2>
         <p class="subtitle">Des designs raffinés pour des moments inoubliables</p>
         
-        <div class="grid-illustrations">
-            <div class="card" onclick="ouvrirModale('Éternel')">
-                <div class="card-image-placeholder">
-                    <span>Illustration Site Mariage Unique</span>
+        <!-- Conteneur principal du slider -->
+        <div class="slider-wrapper">
+            <div class="slider-container">
+                <!-- Modèle Éternel -->
+                <div class="card card-slider" onclick="ouvrirModale('Éternel')">
+                    <span class="badge-reduction">-10% Promo</span>
+                    <div class="card-image-placeholder">
+                        <span>Illustration Site Mariage Unique</span>
+                    </div>
+                    <div class="card-info">
+                        <h3>Modèle "Éternel"</h3>
+                        <p>Design épuré, galerie photo interactive et liste de mariage en ligne.</p>
+                        <span class="btn-demo-flat">Voir la démo ›</span>
+                    </div>
                 </div>
-                <div class="card-info">
-                    <h3>Modèle "Éternel"</h3>
-                    <p>Design épuré, galerie photo interactive et liste de mariage en ligne.</p>
-                </div>
-            </div>
 
-            <div class="card" onclick="ouvrirModale('Bohème')">
-                <div class="card-image-placeholder">
-                    <span>Illustration Site Mariage Bohème</span>
-                </div>
-                <div class="card-info">
-                    <h3>Modèle "Bohème"</h3>
-                    <p>Couleurs chaudes, RSVP intégré et fil d'actualité pour les invités.</p>
+                <!-- Modèle Bohème -->
+                <div class="card card-slider" onclick="ouvrirModale('Bohème')">
+                    <span class="badge-reduction">-10% Promo</span>
+                    <div class="card-image-placeholder">
+                        <span>Illustration Site Mariage Bohème</span>
+                    </div>
+                    <div class="card-info">
+                        <h3>Modèle "Bohème"</h3>
+                        <p>Couleurs chaudes, RSVP intégré et fil d'actualité pour les invités.</p>
+                        <span class="btn-demo-flat">Voir la démo ›</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -325,11 +420,11 @@
             titreModale.innerText = 'Modèle "' + nomModele + '"';
             
             if (nomModele === 'Éternel') {
-                // Comportement spécifique pour le modèle Éternel
+                // Nouvelle redirection pour le modèle Éternel
                 boutonAction.innerText = "Visiter le site éternel";
-                boutonAction.href = "https://boazmeya-lab.github.io/Smartech-/";
+                boutonAction.href = "https://invitation-demo.smartcheck.site";
             } else {
-                // Comportement par défaut (ex: Bohème) -> Redirection WhatsApp
+                // Comportement par défaut (ex: Bohème) -> Redirection WhatsApp (Conserve le même lien d'origine)
                 boutonAction.innerText = "Obtenir l'info";
                 var monNumero = "243829744248";
                 var message = "Bonjour Smartech, je souhaite obtenir l'info pour le modèle " + nomModele;
@@ -351,4 +446,4 @@
         }
     </script>
 </body>
-</html>
+                    </html>

@@ -239,6 +239,110 @@
             font-size: 14px;
         }
 
+        /* --- STYLE DES BANNIÈRES EN TÊTE (ROUGE ET BLEUE) --- */
+        .banner-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 15px;
+        }
+
+        .banner-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            border-radius: 6px;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .banner-red {
+            background-color: #e63946;
+        }
+
+        .banner-blue {
+            background-color: #007bff;
+        }
+
+        .banner-val {
+            font-size: 13px;
+            opacity: 0.95;
+        }
+
+        /* --- SECTION NOS CHIFFRES & LOGO --- */
+        .stats-section {
+            padding: 60px 20px;
+            background-color: #ffffff;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .stats-logo-container {
+            margin-bottom: 25px;
+        }
+
+        .stats-logo {
+            max-width: 120px;
+            height: auto;
+        }
+
+        .stats-section h2 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #111111;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .stats-divider {
+            width: 50px;
+            height: 3px;
+            background-color: #e67e22;
+            margin: 0 auto 20px auto;
+            border-radius: 2px;
+        }
+
+        .stats-subtitle {
+            color: #666666;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: #e67e22;
+            line-height: 1.1;
+        }
+
+        .stat-label {
+            margin-top: 8px;
+            font-size: 15px;
+            color: #444444;
+            font-weight: 600;
+        }
+
         /* --- ADAPTATION GRAND ÉCRAN --- */
         @media (min-width: 768px) {
             .slider-container {
@@ -253,6 +357,16 @@
             }
             .card-slider:hover {
                 transform: translateY(-5px);
+            }
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .stat-number {
+                font-size: 48px;
+            }
+            .banner-box {
+                font-size: 16px;
+                padding: 16px 25px;
             }
         }
     </style>
@@ -272,6 +386,7 @@
         <ul class="nav-links" id="nav-links">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#selection-model">Modèles</a></li>
+            <li><a href="#chiffres">Nos Chiffres</a></li>
             <li><a href="#prix">Prix</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -328,6 +443,50 @@
                         <span class="btn-demo-flat">Voir la démo ›</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Nos Chiffres -->
+    <section class="stats-section" id="chiffres">
+        
+        <!-- Bannières d'en-tête (Rouge et Bleue) -->
+        <div class="banner-container">
+            <div class="banner-box banner-red">
+                <span>INVITATION ÉLECTRONIQUE</span>
+                <span class="banner-val">NBRE VARIABLE</span>
+            </div>
+            <div class="banner-box banner-blue">
+                <span>SMS | WHATSAPP | MAIL</span>
+                <span class="banner-val">NBRE VARIABLE</span>
+            </div>
+        </div>
+
+        <!-- Logo et Titre -->
+        <div class="stats-logo-container">
+            <img src="logo.png" alt="Logo Smart" class="stats-logo">
+        </div>
+        <h2>NOS CHIFFRES</h2>
+        <div class="stats-divider"></div>
+        <p class="stats-subtitle">Nous vous remercions pour la confiance que vous nous accordez.</p>
+
+        <!-- Grille des statistiques -->
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">349</span>
+                <span class="stat-label">Événements</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">276</span>
+                <span class="stat-label">Mariages</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">35 978</span>
+                <span class="stat-label">Invitations électroniques</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">8 253</span>
+                <span class="stat-label">Avis des invités</span>
             </div>
         </div>
     </section>

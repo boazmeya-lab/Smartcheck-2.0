@@ -50,7 +50,10 @@
     /* Navigation */
     .nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.92); backdrop-filter: blur(10px); border-bottom: 1px solid #f1e3d8; }
     .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-    .logo { font-family: 'Rye', serif; font-size: 1.5rem; color: var(--corail); text-decoration: none; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.35rem; text-decoration: none; color: var(--encre); }
+    .logo-mark { width: 38px; height: 38px; flex: none; }
+    .logo b { color: var(--corail); font-weight: 800; }
+    .logo-clair { color: #fff; }
     .nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; align-items: center; }
     .nav ul a { text-decoration: none; font-weight: 600; }
     .nav ul a:hover { color: var(--corail); }
@@ -61,40 +64,47 @@
     .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
     /* Hero */
-    .hero { background: var(--orange); text-align: center; padding: 84px 0 72px; overflow: hidden; }
+    .hero { background: var(--orange); text-align: center; padding: 72px 0 64px; overflow: hidden; }
     .hero h1 { font-family: 'Rye', serif; font-weight: 400; font-size: clamp(5rem, 28vw, 11rem); color: var(--corail); margin: 0; letter-spacing: 3px; text-shadow: -10px 10px 22px rgba(123,79,214,.6); animation: arrive .9s cubic-bezier(.2,.8,.2,1) both; }
     @keyframes arrive { from { opacity: 0; transform: translateY(24px) scale(.96); } to { opacity: 1; transform: none; } }
-    .hero .slogan { font-size: clamp(1.4rem, 5vw, 2.2rem); letter-spacing: .25em; margin: 28px 0 8px; font-weight: 500; text-transform: lowercase; }
-    .hero .promo { font-style: italic; margin-bottom: 8px; }
-    .hero .lead { max-width: 56ch; margin: 18px auto 30px; font-size: 1.1rem; }
-    .hero .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hero .slogan { font-size: clamp(1.4rem, 5vw, 2.2rem); letter-spacing: .25em; margin: 24px 0 6px; font-weight: 500; }
+    .hero .tagline { font-size: clamp(1.05rem, 3.4vw, 1.35rem); font-weight: 700; margin: 0 0 28px; }
+    .hero-image { max-width: 560px; margin: 40px auto 0; }
+    .hero-image img { width: 100%; border-radius: 22px; box-shadow: 0 18px 40px rgba(31,22,18,.25); }
 
-    /* Services */
-    .services-grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
-    .service { background: #fff; border: 2px solid var(--encre); border-radius: var(--rayon); padding: 28px 24px; display: flex; flex-direction: column; gap: 6px; }
-    .service:nth-child(2) { background: var(--fond-doux); }
-    .service:nth-child(3) { background: var(--violet); color: #fff; border-color: var(--violet); }
-    .service h3 { font-size: 1.35rem; }
-    .service .pour { margin-top: auto; padding-top: 14px; font-weight: 700; font-size: .95rem; }
-    .service ul { padding-left: 1.1em; margin: 8px 0 0; }
+    /* Services (compact) */
+    .services-bar { padding: 44px 0; }
+    .services-bar h2 { font-size: 1.3rem; margin-bottom: 14px; }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .tabs button { font: inherit; font-weight: 700; padding: 10px 18px; border-radius: 99px; border: 2px solid var(--encre); background: #fff; cursor: pointer; }
+    .tabs button[aria-selected="true"] { background: var(--encre); color: #fff; }
+    .tabpanel { background: var(--fond-doux); border-radius: var(--rayon); padding: 20px 22px; max-width: 760px; }
+    .tabpanel[hidden] { display: none; }
+    .tabpanel h3 { font-size: 1.15rem; margin-bottom: 6px; }
+    .tabpanel p { margin: 0 0 6px; }
+    .tabpanel .pour { font-weight: 700; font-size: .95rem; margin: 8px 0 0; }
 
-    /* Générateur de carte */
-    .studio { background: var(--fond-doux); }
-    .studio-grid { display: grid; gap: 40px; grid-template-columns: 1fr; align-items: center; }
-    .formulaire { display: grid; gap: 16px; }
-    .champ label { display: block; font-weight: 700; margin-bottom: 6px; }
-    .champ input, .champ select { width: 100%; padding: 14px; border: 2px solid var(--encre); border-radius: 12px; font: inherit; background: #fff; }
-    .palette { display: flex; gap: 10px; }
-    .palette button { width: 44px; height: 44px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 2px var(--encre); cursor: pointer; }
-    .palette button[aria-pressed="true"] { box-shadow: 0 0 0 4px var(--glow); }
-
-    .carte { width: min(340px, 100%); margin-inline: auto; border-radius: 24px; padding: 32px 24px; text-align: center; color: #fff; background: linear-gradient(160deg, var(--c1), var(--c2)); box-shadow: 0 18px 40px rgba(255,90,95,.35); --c1: #ff8f4d; --c2: #ff5a5f; transition: background .3s; }
+    /* Carrousel de cartes */
+    .studio { background: var(--fond-doux); text-align: center; }
+    .studio .section-intro { margin-inline: auto; }
+    .slides { display: grid; width: min(340px, 100%); margin: 0 auto; }
+    .slide { grid-area: 1 / 1; opacity: 0; transform: translateX(40px) scale(.97); transition: opacity .6s, transform .6s; pointer-events: none; }
+    .slide.actif { opacity: 1; transform: none; pointer-events: auto; }
+    .slide.sortie { transform: translateX(-40px) scale(.97); }
+    .carte { height: 100%; border-radius: 24px; padding: 32px 24px; color: #fff; background: linear-gradient(160deg, var(--c1), var(--c2)); box-shadow: 0 18px 40px rgba(31,22,18,.22); }
     .carte small { opacity: .9; font-size: .9rem; }
-    .carte h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 2rem; margin: 10px 0 6px; overflow-wrap: anywhere; }
-    .carte .invite { font-weight: 700; font-size: 1.15rem; margin-bottom: 4px; overflow-wrap: anywhere; }
+    .carte h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 1.9rem; margin: 10px 0 8px; overflow-wrap: anywhere; }
+    .carte .invite { font-weight: 700; font-size: 1.15rem; margin-bottom: 4px; }
     .carte .infos { font-size: .95rem; margin-bottom: 18px; }
     .carte .qr { background: #fff; width: 164px; padding: 12px; border-radius: 16px; margin: 0 auto 10px; }
     .carte .qr img { width: 140px; height: 140px; }
+    .carte-orange { --c1: #ff8f4d; --c2: #ff5a5f; }
+    .carte-violet { --c1: #7b4fd6; --c2: #2a1646; outline: 2px dashed rgba(255,255,255,.4); outline-offset: -12px; }
+    .carte-or { --c1: #2b2218; --c2: #14100c; color: #ecd08a; border: 2px solid #d4af37; }
+    .points { display: flex; gap: 4px; justify-content: center; margin: 22px 0 22px; }
+    .points button { width: 24px; height: 24px; border: 0; background: none; cursor: pointer; position: relative; padding: 0; }
+    .points button::after { content: ""; position: absolute; inset: 7px; border-radius: 50%; background: #dcc3b2; transition: background .2s; }
+    .points button[aria-current="true"]::after { background: var(--corail); }
 
     /* Fonctions modernes */
     .fonctions { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
@@ -145,15 +155,22 @@
     .qr-outil { background: var(--fond-doux); text-align: center; }
 
     /* Pied de page */
-    footer { background: var(--encre); color: #e9dcd3; padding: 44px 0 90px; }
-    footer .wrap { display: grid; gap: 22px; }
-    footer a { color: #fff; }
+    footer { background: var(--violet); color: #d9cfe8; padding: 56px 0 24px; }
+    .pied-grid { display: grid; gap: 36px; grid-template-columns: 1fr; }
+    footer h3 { color: #fff; font-size: 1rem; margin-bottom: 12px; }
+    footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+    footer a { color: #d9cfe8; text-decoration: none; }
+    footer a:hover { color: var(--orange); }
+    footer a.btn { color: var(--encre); }
+    .pied-slogan { font-family: 'Rye', serif; color: var(--corail); font-size: 1.5rem; margin: 16px 0 4px; }
+    .pied-marque p { max-width: 34ch; }
+    .pied-bas { margin-top: 40px; padding-top: 20px; padding-bottom: 64px; border-top: 1px solid rgba(255,255,255,.15); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 
     /* Bouton WhatsApp flottant */
     .wa { position: fixed; right: 18px; bottom: 18px; z-index: 60; background: #25d366; color: #fff; padding: 14px 20px; border-radius: 99px; font-weight: 800; text-decoration: none; box-shadow: 0 8px 22px rgba(0,0,0,.25); }
 
     @media (min-width: 860px) {
-      .studio-grid { grid-template-columns: 1fr 1fr; }
+      .pied-grid { grid-template-columns: 1.6fr 1fr 1fr 1fr; }
       .chiffres-grid { grid-template-columns: repeat(4, 1fr); }
     }
     @media (max-width: 760px) {
@@ -170,9 +187,21 @@
 </head>
 <body>
 
+  <!-- Symbole du logo (pour utiliser ton propre logo : remplace les <svg class="logo-mark"> par <img src="logo.png" alt="SmartEvent" height="38">) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="logo-mark" viewBox="0 0 40 40">
+      <rect width="40" height="40" rx="11" fill="#ff5a5f"/>
+      <rect x="8" y="8" width="10" height="10" rx="2.5" fill="#fff"/>
+      <rect x="22" y="8" width="10" height="10" rx="2.5" fill="#ffd9b8"/>
+      <rect x="8" y="22" width="10" height="10" rx="2.5" fill="#ffd9b8"/>
+      <rect x="22" y="22" width="4.5" height="4.5" rx="1" fill="#fff"/>
+      <rect x="27.5" y="27.5" width="4.5" height="4.5" rx="1" fill="#fff"/>
+    </symbol>
+  </svg>
+
   <nav class="nav" aria-label="Navigation principale">
     <div class="wrap">
-      <a href="#accueil" class="logo">SmartEvent</a>
+      <a href="#accueil" class="logo" aria-label="SmartEvent, accueil"><svg class="logo-mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Smart<b>Event</b></span></a>
       <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu">
         <span></span><span></span><span></span>
       </button>
@@ -191,72 +220,81 @@
     <div class="wrap">
       <h1>SHII</h1>
       <p class="slogan">ba yeba te</p>
-      <p class="promo">Actuellement 10 % de réduction sur toutes vos commandes</p>
-      <p class="lead">Invitations numériques, confirmations de présence et QR codes pour vos mariages, anniversaires, conférences et événements d'entreprise.</p>
-      <div class="actions">
-        <a href="#carte" class="btn btn-noir">Créer ma carte d'invitation</a>
-        <a href="#services" class="btn btn-contour">Voir les services</a>
-      </div>
+      <p class="tagline">L'événementiel intelligent, réinventé</p>
+      <a href="#carte" class="btn btn-noir">Découvrir</a>
+      <!-- Ton image d'accueil : mets un fichier hero.jpg à côté de index.html (elle s'affiche toute seule, sinon cette zone disparaît) -->
+      <div class="hero-image"><img src="hero.jpg" alt="Invitation SmartEvent" onerror="this.parentElement.remove()"></div>
     </div>
   </header>
 
-  <section class="section" id="services">
+  <section class="section services-bar" id="services">
     <div class="wrap">
-      <h2>Trois services, un seul objectif : un événement sans stress</h2>
-      <p class="section-intro">Choisissez ce qui correspond à votre événement. Vous pouvez commencer simple et ajouter des options plus tard.</p>
-      <div class="services-grid">
-        <article class="service">
-          <h3>SmartEvent Invitation</h3>
-          <p>Invitations numériques personnalisées, lien de partage et page événementielle.</p>
-          <p class="pour">Pour les anniversaires, mariages et fêtes privées.</p>
-        </article>
-        <article class="service">
-          <h3>SmartEvent RSVP &amp; QR</h3>
-          <p>Site d'événement, confirmations de présence et QR codes pour faciliter le contrôle des entrées.</p>
-          <p class="pour">Pour les événements avec une liste d'invités à gérer.</p>
-        </article>
-        <article class="service">
-          <h3>SmartEvent Business</h3>
-          <p>Solution adaptée aux conférences, lancements de produits et événements d'entreprise.</p>
-          <p class="pour">Tarification sur devis selon le nombre d'invités et les fonctionnalités demandées.</p>
-        </article>
+      <h2>Nos services</h2>
+      <div class="tabs" role="tablist" aria-label="Nos services">
+        <button role="tab" id="t1" aria-selected="true" aria-controls="p1">Invitation</button>
+        <button role="tab" id="t2" aria-selected="false" aria-controls="p2" tabindex="-1">RSVP &amp; QR</button>
+        <button role="tab" id="t3" aria-selected="false" aria-controls="p3" tabindex="-1">Business</button>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="p1" aria-labelledby="t1">
+        <h3>SmartEvent Invitation</h3>
+        <p>Invitations numériques personnalisées, lien de partage et page événementielle.</p>
+        <p class="pour">Pour les anniversaires, mariages et fêtes privées.</p>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+        <h3>SmartEvent RSVP &amp; QR</h3>
+        <p>Site d'événement, confirmations de présence et QR codes pour faciliter le contrôle des entrées.</p>
+        <p class="pour">Pour les événements avec une liste d'invités à gérer.</p>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+        <h3>SmartEvent Business</h3>
+        <p>Solution adaptée aux conférences, lancements de produits et événements d'entreprise.</p>
+        <p class="pour">Tarification sur devis selon le nombre d'invités et les fonctionnalités demandées.</p>
       </div>
     </div>
   </section>
 
   <section class="section studio" id="carte">
-    <div class="wrap studio-grid">
-      <div>
-        <h2>Nouveau : l'invitation en carte avec QR code</h2>
-        <p class="section-intro">Remplissez les champs, la carte se met à jour en direct. Chaque invité reçoit sa carte avec un QR code personnel à présenter à l'entrée.</p>
-        <form class="formulaire" onsubmit="return false">
-          <div class="champ"><label for="f-invite">Nom de l'invité</label><input id="f-invite" value="Grâce Mbuyi" maxlength="40"></div>
-          <div class="champ"><label for="f-event">Nom de l'événement</label><input id="f-event" value="Mariage Sarah &amp; David" maxlength="40"></div>
-          <div class="champ"><label for="f-date">Date</label><input id="f-date" type="date"></div>
-          <div class="champ"><label for="f-lieu">Lieu</label><input id="f-lieu" value="Salle Le Prestige, Kinshasa" maxlength="60"></div>
-          <div class="champ">
-            <label id="l-couleur">Couleur de la carte</label>
-            <div class="palette" role="group" aria-labelledby="l-couleur">
-              <button type="button" aria-pressed="true" aria-label="Orange" style="background:linear-gradient(135deg,#ff8f4d,#ff5a5f)" data-c1="#ff8f4d" data-c2="#ff5a5f"></button>
-              <button type="button" aria-pressed="false" aria-label="Violet" style="background:linear-gradient(135deg,#7b4fd6,#2a1646)" data-c1="#7b4fd6" data-c2="#2a1646"></button>
-              <button type="button" aria-pressed="false" aria-label="Vert" style="background:linear-gradient(135deg,#2fb67c,#0f5c43)" data-c1="#2fb67c" data-c2="#0f5c43"></button>
-              <button type="button" aria-pressed="false" aria-label="Noir et or" style="background:linear-gradient(135deg,#d4af37,#1f1612)" data-c1="#d4af37" data-c2="#1f1612"></button>
-            </div>
+    <div class="wrap">
+      <h2>Nouveau : l'invitation en carte avec QR code</h2>
+      <p class="section-intro">Chaque invité reçoit sa carte avec un QR code personnel, à présenter à l'entrée.</p>
+      <div class="slides" aria-roledescription="carrousel" aria-label="Exemples de cartes d'invitation">
+        <article class="slide actif" aria-label="Carte 1 sur 3">
+          <div class="carte carte-orange">
+            <small>Vous êtes invité(e)</small>
+            <h3>Mariage Sarah &amp; David</h3>
+            <div class="invite">Grâce Mbuyi</div>
+            <div class="infos">Samedi 19 décembre 2026<br>Salle Le Prestige, Kinshasa</div>
+            <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&amp;margin=0&amp;data=SmartEvent-demo-1" alt="" width="140" height="140"></div>
+            <small>Présentez ce QR code à l'entrée</small>
           </div>
-          <a id="commander" class="btn btn-noir" href="#" target="_blank" rel="noopener">Commander cette carte sur WhatsApp</a>
-        </form>
+        </article>
+        <article class="slide" aria-label="Carte 2 sur 3">
+          <div class="carte carte-violet">
+            <small>Vous êtes invité(e)</small>
+            <h3>Anniversaire de Jonathan</h3>
+            <div class="invite">Patrick Kasongo</div>
+            <div class="infos">Dimanche 14 février 2027<br>Jardin des Palmiers, Kinshasa</div>
+            <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&amp;margin=0&amp;data=SmartEvent-demo-2" alt="" width="140" height="140"></div>
+            <small>Présentez ce QR code à l'entrée</small>
+          </div>
+        </article>
+        <article class="slide" aria-label="Carte 3 sur 3">
+          <div class="carte carte-or">
+            <small>Vous êtes invité(e)</small>
+            <h3>Lancement Café Kivu</h3>
+            <div class="invite">Esther Lutete</div>
+            <div class="infos">Jeudi 11 mars 2027<br>Hôtel du Fleuve, Kinshasa</div>
+            <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&amp;margin=0&amp;data=SmartEvent-demo-3" alt="" width="140" height="140"></div>
+            <small>Présentez ce QR code à l'entrée</small>
+          </div>
+        </article>
       </div>
-
-      <div>
-        <div class="carte" id="carte-apercu" aria-live="polite">
-          <small>Vous êtes invité(e)</small>
-          <h3 id="c-event">Mariage Sarah &amp; David</h3>
-          <div class="invite" id="c-invite">Grâce Mbuyi</div>
-          <div class="infos"><span id="c-date"></span><br><span id="c-lieu"></span></div>
-          <div class="qr"><img id="c-qr" alt="QR code de l'invité" width="140" height="140"></div>
-          <small>Présentez ce QR code à l'entrée</small>
-        </div>
+      <div class="points" role="group" aria-label="Choisir une carte">
+        <button aria-label="Carte 1" aria-current="true"></button>
+        <button aria-label="Carte 2" aria-current="false"></button>
+        <button aria-label="Carte 3" aria-current="false"></button>
       </div>
+      <a class="btn btn-noir" href="https://wa.me/243829744248?text=Bonjour%20SmartEvent%2C%20je%20souhaite%20commander%20une%20carte%20d%27invitation%20avec%20QR%20code." target="_blank" rel="noopener">Commander ma carte</a>
     </div>
   </section>
 
@@ -394,11 +432,42 @@
   </section>
 
   <footer id="contact">
-    <div class="wrap">
-      <div class="logo" style="color:var(--orange)">SmartEvent</div>
-      <p>Invitations numériques, RSVP et QR codes. Shii ba yeba te.</p>
-      <p><a href="https://wa.me/243829744248" target="_blank" rel="noopener">Écrire sur WhatsApp</a> · <a href="https://qrcode.smartevent.site" target="_blank" rel="noopener">SmartLab QR</a></p>
+    <div class="wrap pied-grid">
+      <div class="pied-marque">
+        <a href="#accueil" class="logo logo-clair" aria-label="SmartEvent, accueil"><svg class="logo-mark" aria-hidden="true"><use href="#logo-mark"/></svg><span>Smart<b>Event</b></span></a>
+        <div class="pied-slogan">Shii ba yeba te</div>
+        <p>L'événementiel intelligent, réinventé.</p>
+        <a class="btn btn-orange" href="https://wa.me/243829744248" target="_blank" rel="noopener">Écrire sur WhatsApp</a>
+      </div>
+      <nav aria-label="Pied de page">
+        <h3>Explorer</h3>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#carte">Carte QR</a></li>
+          <li><a href="#modeles">Modèles</a></li>
+          <li><a href="#tarifs">Tarifs</a></li>
+          <li><a href="#faq">Questions</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h3>Services</h3>
+        <ul>
+          <li>SmartEvent Invitation</li>
+          <li>SmartEvent RSVP &amp; QR</li>
+          <li>SmartEvent Business</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="https://wa.me/243829744248" target="_blank" rel="noopener">WhatsApp : +243 829 744 248</a></li>
+          <li><a href="https://qrcode.smartevent.site" target="_blank" rel="noopener">SmartLab : QR codes gratuits</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap pied-bas">
       <small>© <span id="annee"></span> SmartEvent. Tous droits réservés.</small>
+      <small>Invitations numériques · RSVP · QR codes</small>
     </div>
   </footer>
 
@@ -417,48 +486,49 @@
       burger.setAttribute('aria-expanded', 'false');
     }));
 
-    // Carte d'invitation en direct
     const $ = id => document.getElementById(id);
-    const carte = $('carte-apercu');
-    const champs = ['f-invite', 'f-event', 'f-date', 'f-lieu'];
+    const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Date par défaut : dans 30 jours
-    const d = new Date(); d.setDate(d.getDate() + 30);
-    $('f-date').value = d.toISOString().slice(0, 10);
-
-    function majCarte() {
-      const invite = $('f-invite').value.trim() || 'Invité';
-      const event = $('f-event').value.trim() || 'Votre événement';
-      const lieu = $('f-lieu').value.trim();
-      const dateVal = $('f-date').value;
-      const dateTxt = dateVal
-        ? new Date(dateVal + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
-        : '';
-      $('c-invite').textContent = invite;
-      $('c-event').textContent = event;
-      $('c-date').textContent = dateTxt;
-      $('c-lieu').textContent = lieu;
-
-      const data = 'SmartEvent|' + event + '|' + invite + '|' + dateVal + '|' + lieu;
-      $('c-qr').src = 'https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=0&data=' + encodeURIComponent(data);
-
-      const msg = 'Bonjour SmartEvent, je souhaite commander cette carte d\'invitation :\n'
-        + '- Événement : ' + event + '\n- Invité : ' + invite + '\n- Date : ' + (dateTxt || 'à définir') + '\n- Lieu : ' + (lieu || 'à définir');
-      $('commander').href = 'https://wa.me/243829744248?text=' + encodeURIComponent(msg);
+    // Onglets des services
+    const onglets = [...document.querySelectorAll('.tabs [role=tab]')];
+    function choisir(o) {
+      onglets.forEach(x => {
+        const actif = x === o;
+        x.setAttribute('aria-selected', actif);
+        x.tabIndex = actif ? 0 : -1;
+        document.getElementById(x.getAttribute('aria-controls')).hidden = !actif;
+      });
     }
-    champs.forEach(id => $(id).addEventListener('input', majCarte));
-    document.querySelectorAll('.palette button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.palette button').forEach(b => b.setAttribute('aria-pressed', 'false'));
-        btn.setAttribute('aria-pressed', 'true');
-        carte.style.setProperty('--c1', btn.dataset.c1);
-        carte.style.setProperty('--c2', btn.dataset.c2);
+    onglets.forEach((o, k) => {
+      o.addEventListener('click', () => choisir(o));
+      o.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        const n = onglets[(k + (e.key === 'ArrowRight' ? 1 : -1) + onglets.length) % onglets.length];
+        choisir(n); n.focus();
       });
     });
-    majCarte();
+
+    // Carrousel de cartes
+    const slides = [...document.querySelectorAll('.slide')];
+    const points = [...document.querySelectorAll('.points button')];
+    let courant = 0, minuteur;
+    function aller(n) {
+      const avant = slides[courant];
+      avant.classList.remove('actif'); avant.classList.add('sortie');
+      setTimeout(() => avant.classList.remove('sortie'), 650);
+      courant = (n + slides.length) % slides.length;
+      slides[courant].classList.add('actif');
+      points.forEach((p, k) => p.setAttribute('aria-current', k === courant));
+    }
+    const arreter = () => clearInterval(minuteur);
+    const demarrer = () => { if (reduit) return; arreter(); minuteur = setInterval(() => aller(courant + 1), 3500); };
+    points.forEach((p, k) => p.addEventListener('click', () => { aller(k); demarrer(); }));
+    const zone = document.querySelector('.slides');
+    zone.addEventListener('mouseenter', arreter);
+    zone.addEventListener('mouseleave', demarrer);
+    demarrer();
 
     // Compteurs animés
-    const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const fmt = n => n.toLocaleString('fr-FR');
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {

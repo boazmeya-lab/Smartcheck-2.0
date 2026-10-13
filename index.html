@@ -1,668 +1,482 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5268338534091442"
-     crossorigin="anonymous"></script>   
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smartevent - Créez votre site web</title>
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Importation d'une belle police moderne -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    
-    <style>
-        /* CSS intégré pour le défilement fluide et la pop-up */
-        html {
-            scroll-behavior: smooth;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartEvent – Invitations numériques, RSVP et QR codes</title>
+  <meta name="description" content="Invitations numériques, confirmations de présence et QR codes pour mariages, anniversaires, conférences et événements d'entreprise.">
+  <meta name="theme-color" content="#ff8f4d">
 
-        /* Style de l'arrière-plan de la Pop-up (Masquée par défaut) */
-        .modale {
-            display: none; 
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.75);
-            justify-content: center;
-            align-items: center;
-        }
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5268338534091442" crossorigin="anonymous"></script>
 
-        /* Boîte blanche au centre */
-        .modale-content {
-            background-color: #ffffff;
-            padding: 25px;
-            border-radius: 16px;
-            width: 85%;
-            max-width: 380px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            color: #1a1a1a;
-            font-family: 'Inter', sans-serif;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Figtree:wght@400;500;700;800&display=swap" rel="stylesheet">
 
-        /* Bouton fermer (la croix X) */
-        .fermer {
-            position: absolute;
-            right: 18px;
-            top: 12px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            color: #666;
-            transition: color 0.2s;
-        }
-        .fermer:hover {
-            color: #000;
-        }
+  <style>
+    :root {
+      --orange: #ff8f4d;
+      --corail: #ff5a5f;
+      --violet: #2a1646;
+      --glow: #7b4fd6;
+      --encre: #1f1612;
+      --gris: #6b5f58;
+      --fond: #ffffff;
+      --fond-doux: #fff1e6;
+      --rayon: 18px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body { margin: 0; font-family: 'Figtree', system-ui, sans-serif; color: var(--encre); background: var(--fond); line-height: 1.6; font-size: 1rem; }
+    img, video { max-width: 100%; display: block; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--glow); outline-offset: 3px; border-radius: 6px; }
+    h1, h2, h3 { line-height: 1.15; margin: 0 0 .5em; }
+    h2 { font-size: clamp(1.6rem, 5vw, 2.4rem); font-weight: 800; }
+    p { margin: 0 0 1em; }
+    .wrap { width: min(1120px, 100% - 40px); margin-inline: auto; }
+    .section { padding: 72px 0; }
+    .section-intro { max-width: 60ch; color: var(--gris); margin-bottom: 36px; }
 
-        /* Style du bouton "Obtenir l'info" / "Visiter" (Noir et Doré) */
-        .btn-info {
-            display: block;
-            background: #111111;
-            color: #fcf6ba;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            padding: 14px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border: 2px solid #bf953f;
-            transition: background 0.2s, transform 0.2s;
-        }
-        .btn-info:hover {
-            background: #bf953f;
-            color: #111111;
-            transform: translateY(-2px);
-        }
-        
-        /* Curseur pour indiquer que les cartes sont cliquables */
-        .card {
-            cursor: pointer;
-        }
+    /* Boutons */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 24px; border-radius: 12px; font-weight: 700; text-decoration: none; border: 2px solid transparent; cursor: pointer; font: inherit; font-weight: 700; transition: transform .15s, background .15s, color .15s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-noir { background: var(--encre); color: #fff; }
+    .btn-noir:hover { background: #000; }
+    .btn-orange { background: var(--orange); color: var(--encre); }
+    .btn-contour { border-color: var(--encre); color: var(--encre); background: transparent; }
+    .btn-contour:hover { background: var(--encre); color: #fff; }
 
-        /* Styles pour l'affichage correct des réductions de prix */
-        .price {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px 0;
-        }
-        .old-price {
-            text-decoration: line-through;
-            color: #888888;
-            font-size: 16px;
-        }
-        .new-price {
-            font-size: 32px;
-            font-weight: 800;
-            color: #111111;
-            margin: 8px 0;
-        }
-        .price small {
-            color: #e67e22;
-            font-weight: 600;
-            margin-top: 4px;
-        }
+    /* Navigation */
+    .nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.92); backdrop-filter: blur(10px); border-bottom: 1px solid #f1e3d8; }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .logo { font-family: 'Rye', serif; font-size: 1.5rem; color: var(--corail); text-decoration: none; }
+    .nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; align-items: center; }
+    .nav ul a { text-decoration: none; font-weight: 600; }
+    .nav ul a:hover { color: var(--corail); }
+    .burger { display: none; background: none; border: 0; width: 44px; height: 44px; cursor: pointer; }
+    .burger span { display: block; height: 3px; background: var(--encre); margin: 6px 10px; border-radius: 2px; transition: transform .2s, opacity .2s; }
+    .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
-        /* Conteneur global des prix plus aéré */
-        .pricing-container {
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            flex-wrap: wrap;
-            gap: 45px;
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    /* Hero */
+    .hero { background: var(--orange); text-align: center; padding: 84px 0 72px; overflow: hidden; }
+    .hero h1 { font-family: 'Rye', serif; font-weight: 400; font-size: clamp(5rem, 28vw, 11rem); color: var(--corail); margin: 0; letter-spacing: 3px; text-shadow: -10px 10px 22px rgba(123,79,214,.6); animation: arrive .9s cubic-bezier(.2,.8,.2,1) both; }
+    @keyframes arrive { from { opacity: 0; transform: translateY(24px) scale(.96); } to { opacity: 1; transform: none; } }
+    .hero .slogan { font-size: clamp(1.4rem, 5vw, 2.2rem); letter-spacing: .25em; margin: 28px 0 8px; font-weight: 500; text-transform: lowercase; }
+    .hero .promo { font-style: italic; margin-bottom: 8px; }
+    .hero .lead { max-width: 56ch; margin: 18px auto 30px; font-size: 1.1rem; }
+    .hero .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-        /* Cartes de prix */
-        .price-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-            text-align: center;  
-            padding: 40px 30px;
-            background: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            width: 100%;
-            max-width: 340px;
-        }
+    /* Services */
+    .services-grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
+    .service { background: #fff; border: 2px solid var(--encre); border-radius: var(--rayon); padding: 28px 24px; display: flex; flex-direction: column; gap: 6px; }
+    .service:nth-child(2) { background: var(--fond-doux); }
+    .service:nth-child(3) { background: var(--violet); color: #fff; border-color: var(--violet); }
+    .service h3 { font-size: 1.35rem; }
+    .service .pour { margin-top: auto; padding-top: 14px; font-weight: 700; font-size: .95rem; }
+    .service ul { padding-left: 1.1em; margin: 8px 0 0; }
 
-        .price-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 30px 0;
-            text-align: left; 
-            width: 100%;
-            max-width: 260px; 
-        }
+    /* Générateur de carte */
+    .studio { background: var(--fond-doux); }
+    .studio-grid { display: grid; gap: 40px; grid-template-columns: 1fr; align-items: center; }
+    .formulaire { display: grid; gap: 16px; }
+    .champ label { display: block; font-weight: 700; margin-bottom: 6px; }
+    .champ input, .champ select { width: 100%; padding: 14px; border: 2px solid var(--encre); border-radius: 12px; font: inherit; background: #fff; }
+    .palette { display: flex; gap: 10px; }
+    .palette button { width: 44px; height: 44px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 2px var(--encre); cursor: pointer; }
+    .palette button[aria-pressed="true"] { box-shadow: 0 0 0 4px var(--glow); }
 
-        .price-card ul li {
-            margin-bottom: 16px;
-            font-size: 15px;
-            line-height: 1.5;
-        }
+    .carte { width: min(340px, 100%); margin-inline: auto; border-radius: 24px; padding: 32px 24px; text-align: center; color: #fff; background: linear-gradient(160deg, var(--c1), var(--c2)); box-shadow: 0 18px 40px rgba(255,90,95,.35); --c1: #ff8f4d; --c2: #ff5a5f; transition: background .3s; }
+    .carte small { opacity: .9; font-size: .9rem; }
+    .carte h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 2rem; margin: 10px 0 6px; overflow-wrap: anywhere; }
+    .carte .invite { font-weight: 700; font-size: 1.15rem; margin-bottom: 4px; overflow-wrap: anywhere; }
+    .carte .infos { font-size: .95rem; margin-bottom: 18px; }
+    .carte .qr { background: #fff; width: 164px; padding: 12px; border-radius: 16px; margin: 0 auto 10px; }
+    .carte .qr img { width: 140px; height: 140px; }
 
-        .price-card .btn-cta {
-            margin-top: auto; 
-            display: inline-block;
-            width: 90%;
-            text-align: center;
-            padding: 14px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    /* Fonctions modernes */
+    .fonctions { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .fonction { padding: 22px; border-radius: var(--rayon); background: #fff; border: 1px solid #f1e3d8; }
+    .fonction .ico { font-size: 1.8rem; }
+    .fonction h3 { font-size: 1.1rem; margin: 8px 0 4px; }
+    .fonction p { color: var(--gris); margin: 0; font-size: .97rem; }
 
-        /* --- STYLE DU CARROUSEL DE MODÈLES --- */
+    /* Modèles */
+    .modeles { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+    .modele { border-radius: var(--rayon); overflow: hidden; background: #fff; border: 2px solid var(--encre); display: flex; flex-direction: column; }
+    .modele .video { height: 220px; background: linear-gradient(135deg, var(--orange), var(--corail)); position: relative; }
+    .modele video { width: 100%; height: 100%; object-fit: cover; }
+    .modele .promo-tag { position: absolute; top: 14px; left: 14px; background: var(--encre); color: #fff; padding: 5px 12px; border-radius: 99px; font-size: .85rem; font-weight: 700; }
+    .modele .corps { padding: 20px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+    .modele .liens { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; padding-top: 12px; }
 
-        .slider-wrapper {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            overflow: hidden;
-            padding: 20px 0;
-        }
+    /* Chiffres */
+    .chiffres { background: var(--violet); color: #fff; text-align: center; }
+    .chiffres-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 16px; margin-top: 30px; }
+    .chiffre b { display: block; font-family: 'Rye', serif; font-weight: 400; font-size: clamp(2.2rem, 8vw, 3.4rem); color: var(--orange); line-height: 1.1; }
 
-        .slider-container {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            padding: 10px 20px;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            -webkit-overflow-scrolling: touch;
-        }
+    /* Tarifs */
+    .tarifs-grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); align-items: stretch; }
+    .tarif { border: 2px solid var(--encre); border-radius: var(--rayon); padding: 30px 24px; display: flex; flex-direction: column; background: #fff; position: relative; }
+    .tarif.vedette { background: var(--orange); }
+    .tarif .badge { position: absolute; top: -14px; right: 20px; background: var(--encre); color: #fff; padding: 4px 14px; border-radius: 99px; font-size: .85rem; font-weight: 700; }
+    .tarif .prix { margin: 10px 0 16px; }
+    .tarif .ancien { text-decoration: line-through; color: var(--gris); display: block; }
+    .tarif .nouveau { font-size: 2.4rem; font-weight: 800; }
+    .tarif ul { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 10px; }
+    .tarif li::before { content: "✔ "; color: var(--corail); font-weight: 800; }
+    .tarif.vedette li::before { color: var(--encre); }
+    .tarif .btn { margin-top: auto; }
+    .devis { margin-top: 26px; padding: 22px; border-radius: var(--rayon); background: var(--violet); color: #fff; display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .devis p { margin: 0; max-width: 56ch; }
 
-        .slider-container::-webkit-scrollbar {
-            display: none;
-        }
+    /* FAQ */
+    .faq { max-width: 760px; }
+    details { border-bottom: 1px solid #e8d6c8; padding: 16px 0; }
+    summary { font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 1.4rem; line-height: 1; color: var(--corail); }
+    details[open] summary::after { content: "–"; }
+    details p { margin: 10px 0 0; color: var(--gris); }
 
-        .card-slider {
-            flex: 0 0 85%;
-            scroll-snap-align: center;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease;
-            position: relative;
-        }
+    /* Outil QR gratuit */
+    .qr-outil { background: var(--fond-doux); text-align: center; }
 
-        /* Style pour l'aperçu vidéo en haut de la carte */
-        .card-video-container {
-            width: 100%;
-            height: 220px;
-            position: relative;
-            overflow: hidden;
-            background: #111;
-        }
+    /* Pied de page */
+    footer { background: var(--encre); color: #e9dcd3; padding: 44px 0 90px; }
+    footer .wrap { display: grid; gap: 22px; }
+    footer a { color: #fff; }
 
-        .card-video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    /* Bouton WhatsApp flottant */
+    .wa { position: fixed; right: 18px; bottom: 18px; z-index: 60; background: #25d366; color: #fff; padding: 14px 20px; border-radius: 99px; font-weight: 800; text-decoration: none; box-shadow: 0 8px 22px rgba(0,0,0,.25); }
 
-        .badge-reduction {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 100%);
-            color: #111111;
-            font-weight: bold;
-            font-size: 12px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            z-index: 10;
-        }
-
-        .card-info {
-            padding: 20px;
-            background: #ffffff;
-        }
-
-        .btn-demo-flat {
-            display: inline-block;
-            margin-top: 15px;
-            color: #bf953f;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        /* --- STYLE DES BANNIÈRES EN TÊTE (ROUGE ET BLEUE) --- */
-        .banner-container {
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto 40px auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            padding: 0 15px;
-        }
-
-        .banner-box {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 20px;
-            border-radius: 6px;
-            color: #ffffff;
-            font-weight: bold;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-        }
-
-        .banner-red {
-            background-color: #e63946;
-        }
-
-        .banner-blue {
-            background-color: #007bff;
-        }
-
-        .banner-val {
-            font-size: 13px;
-            opacity: 0.95;
-        }
-
-        /* --- SECTION NOS CHIFFRES & LOGO --- */
-        .stats-section {
-            padding: 60px 20px;
-            background-color: #ffffff;
-            text-align: center;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .stats-logo-container {
-            margin-bottom: 25px;
-        }
-
-        .stats-logo {
-            max-width: 120px;
-            height: auto;
-        }
-
-        .stats-section h2 {
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: #111111;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .stats-divider {
-            width: 50px;
-            height: 3px;
-            background-color: #e67e22;
-            margin: 0 auto 20px auto;
-            border-radius: 2px;
-        }
-
-        .stats-subtitle {
-            color: #666666;
-            font-size: 16px;
-            margin-bottom: 40px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .stat-number {
-            font-size: 42px;
-            font-weight: 800;
-            color: #e67e22;
-            line-height: 1.1;
-        }
-
-        .stat-label {
-            margin-top: 8px;
-            font-size: 15px;
-            color: #444444;
-            font-weight: 600;
-        }
-
-        /* --- ADAPTATION GRAND ÉCRAN --- */
-        @media (min-width: 768px) {
-            .slider-container {
-                overflow-x: visible;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 30px;
-                padding: 10px 0;
-            }
-            .card-slider {
-                flex: none;
-            }
-            .card-slider:hover {
-                transform: translateY(-5px);
-            }
-            .stats-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            .stat-number {
-                font-size: 48px;
-            }
-            .banner-box {
-                font-size: 16px;
-                padding: 16px 25px;
-            }
-        }
-    </style>
+    @media (min-width: 860px) {
+      .studio-grid { grid-template-columns: 1fr 1fr; }
+      .chiffres-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 760px) {
+      .burger { display: block; }
+      .nav ul { position: absolute; top: 68px; left: 0; right: 0; background: #fff; flex-direction: column; padding: 18px 20px 24px; gap: 16px; border-bottom: 1px solid #f1e3d8; display: none; align-items: flex-start; }
+      .nav ul.ouvert { display: flex; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .hero h1 { animation: none; }
+      .btn, .carte { transition: none; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Barre de navigation -->
-    <nav class="navbar">
-        <div class="logo">Smartech</div>
-        
-        <button class="menu-toggle" id="mobile-menu" aria-label="Ouvrir le menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </button>
-
-        <ul class="nav-links" id="nav-links">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#selection-model">Modèles</a></li>
-            <li><a href="#chiffres">Nos Chiffres</a></li>
-            <li><a href="#prix">Prix</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <!-- Section Hero -->
-    <header class="hero" id="home">
-        <div class="hero-content">
-            <h1>Votre site de mariage en ligne</h1>
-            <p>
-                Organisez vos mariages, conférences et événements avec
-                des invitations numériques, des QR Codes, un scanner
-                intelligent et une assistance par IA.
-            </p>
-            <a href="#selection-model" class="btn-cta">Créer votre site</a>
-        </div>
-    </header>
-
-    <!-- Section Galerie / Illustrations avec Vidéos et Badges -->
-    <section class="gallery-section" id="selection-model">
-        <h2>Nos réalisations & Modèles de Mariage</h2>
-        <p class="subtitle">Des designs raffinés pour des moments inoubliables</p>
-        
-        <div class="slider-wrapper">
-            <div class="slider-container">
-                <!-- Modèle Éternel -->
-                <div class="card card-slider" onclick="ouvrirModale('Éternel')">
-                    <span class="badge-reduction">-10% Promo</span>
-                    <div class="card-video-container">
-                        <video autoplay loop muted playsinline>
-                            <source src="eternel.mp4" type="video/mp4">
-                            Votre navigateur ne supporte pas la vidéo.
-                        </video>
-                    </div>
-                    <div class="card-info">
-                        <h3>Modèle "Éternel"</h3>
-                        <p>Design épuré, galerie photo interactive et liste de mariage en ligne.</p>
-                        <span class="btn-demo-flat">Voir la démo ›</span>
-                    </div>
-                </div>
-
-                <!-- Modèle Bohème -->
-                <div class="card card-slider" onclick="ouvrirModale('Bohème')">
-                    <span class="badge-reduction">-10% Promo</span>
-                    <div class="card-video-container">
-                        <video autoplay loop muted playsinline>
-                            <source src="boheme.mp4" type="video/mp4">
-                            Votre navigateur ne supporte pas la vidéo.
-                        </video>
-                    </div>
-                    <div class="card-info">
-                        <h3>Modèle "Bohème"</h3>
-                        <p>Couleurs chaudes, RSVP intégré et fil d'actualité pour les invités.</p>
-                        <span class="btn-demo-flat">Voir la démo ›</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Nos Chiffres -->
-    <section class="stats-section>
-
-<!-- Section Nos Chiffres -->
-<section class="stats-section" style="text-align: center; padding: 60px 20px;">
-
-  <!-- Logo (si vous voulez le remettre plus tard) -->
-  <div class="stats-logo-container">
-    <img src="image.jpg" alt="Logo Smart" class="stats-logo" style="max-width: 80px; margin: 0 auto 15px auto; display: block;">
-  </div>
-
-  <h2>NOS CHIFFRES</h2>
-  <div class="stats-divider" style="width: 50px; height: 4px; background-color: #d4af37; margin: 10px auto;"></div>
-  <p class="stats-subtitle">Nous vous remercions pour la confiance que vous nous accordez.</p>
-
-  <!-- Grille des statistiques -->
-  ...
-        <!-- Grille des statistiques -->
-        <div class="stats-grid">
-            <div class="stat-item">
-                <span class="stat-number">349</span>
-                <span class="stat-label">Événements</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">276</span>
-                <span class="stat-label">Mariages</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">35 978</span>
-                <span class="stat-label">Invitations électroniques</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">8 253</span>
-                <span class="stat-label">Avis des invités</span>
-            </div>
-        </div>
-    </section>
-<!-- Pub SmartLab QR Code avec Aperçu -->
-<div class="smartlab-ad" style="background: #ffffff; border-radius: 16px; padding: 30px 20px; text-align: center; margin: 40px auto; max-width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #f0f0f0;">
-  
-  <!-- Badges du haut -->
-  <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; flex-wrap: wrap;">
-    <span style="background: #eef2ff; color: #3b82f6; font-size: 0.8rem; font-weight: 600; padding: 5px 12px; border-radius: 20px;">Aperçu en temps réel</span>
-    <span style="background: #eef2ff; color: #3b82f6; font-size: 0.8rem; font-weight: 600; padding: 5px 12px; border-radius: 20px;">Modèles personnalisables</span>
-  </div>
-
-  <!-- Titre et Description -->
-  <h3 style="color: #111827; font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; line-height: 1.3;">
-    Générez des QR Codes <span style="color: #2563eb;">professionnels</span> gratuitement
-  </h3>
-  <p style="font-size: 0.9rem; color: #6b7280; margin-bottom: 20px; line-height: 1.5;">
-    Créez des QR codes personnalisés pour vos liens, Wi-Fi et événements directement avec <strong>SmartLab</strong>.
-  </p>
-
-  <!-- Bouton d'action -->
-  <a href="https://qrcode.smartevent.site" target="_blank" style="display: inline-block; width: 100%; max-width: 300px; background-color: #2563eb; color: #ffffff; font-weight: 700; padding: 14px 20px; border-radius: 10px; text-decoration: none; font-size: 0.95rem; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);">
-    Créer un QR Code gratuitement
-  </a>
-
-  <!-- Titre de la galerie -->
-  <p style="font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; color: #9ca3af; text-transform: uppercase; margin-bottom: 15px;">
-    Aperçu des modèles populaires
-  </p>
-
-  <!-- Carrousel d'images défilable horizontalement -->
-  <div style="display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;">
-    
-    <!-- Modèle 1 -->
-    <div style="flex: 0 0 160px; height: 160px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; padding: 10px; display: flex; align-items: center; justify-content: center; scroll-snap-align: center;">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://smartevent.site" alt="Modèle QR Code" style="width: 100%; height: auto; border-radius: 8px;">
+  <nav class="nav" aria-label="Navigation principale">
+    <div class="wrap">
+      <a href="#accueil" class="logo">SmartEvent</a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="menu">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#carte">Carte QR</a></li>
+        <li><a href="#modeles">Modèles</a></li>
+        <li><a href="#tarifs">Tarifs</a></li>
+        <li><a href="#faq">Questions</a></li>
+        <li><a class="btn btn-noir" href="#contact">Nous contacter</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <!-- Modèle 2 (Carte couleur) -->
-    <div style="flex: 0 0 160px; height: 160px; background: #2563eb; border-radius: 16px; padding: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; scroll-snap-align: center;">
-      <span style="font-size: 0.75rem; font-weight: bold; margin-bottom: 8px;">INSTAGRAM</span>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=Instagram" alt="Modèle QR Code Instagram" style="background: white; padding: 5px; border-radius: 8px;">
+  <header class="hero" id="accueil">
+    <div class="wrap">
+      <h1>SHII</h1>
+      <p class="slogan">ba yeba te</p>
+      <p class="promo">Actuellement 10 % de réduction sur toutes vos commandes</p>
+      <p class="lead">Invitations numériques, confirmations de présence et QR codes pour vos mariages, anniversaires, conférences et événements d'entreprise.</p>
+      <div class="actions">
+        <a href="#carte" class="btn btn-noir">Créer ma carte d'invitation</a>
+        <a href="#services" class="btn btn-contour">Voir les services</a>
+      </div>
     </div>
+  </header>
 
-    <!-- Modèle 3 -->
-    <div style="flex: 0 0 160px; height: 160px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; padding: 10px; display: flex; align-items: center; justify-content: center; scroll-snap-align: center;">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=SmartLab" alt="Modèle QR Code Wifi" style="width: 100%; height: auto; border-radius: 8px;">
+  <section class="section" id="services">
+    <div class="wrap">
+      <h2>Trois services, un seul objectif : un événement sans stress</h2>
+      <p class="section-intro">Choisissez ce qui correspond à votre événement. Vous pouvez commencer simple et ajouter des options plus tard.</p>
+      <div class="services-grid">
+        <article class="service">
+          <h3>SmartEvent Invitation</h3>
+          <p>Invitations numériques personnalisées, lien de partage et page événementielle.</p>
+          <p class="pour">Pour les anniversaires, mariages et fêtes privées.</p>
+        </article>
+        <article class="service">
+          <h3>SmartEvent RSVP &amp; QR</h3>
+          <p>Site d'événement, confirmations de présence et QR codes pour faciliter le contrôle des entrées.</p>
+          <p class="pour">Pour les événements avec une liste d'invités à gérer.</p>
+        </article>
+        <article class="service">
+          <h3>SmartEvent Business</h3>
+          <p>Solution adaptée aux conférences, lancements de produits et événements d'entreprise.</p>
+          <p class="pour">Tarification sur devis selon le nombre d'invités et les fonctionnalités demandées.</p>
+        </article>
+      </div>
     </div>
+  </section>
 
-  </div>
-
-</div>
-    <!-- Section Tarifs -->
-    <section class="pricing" id="prix" style="text-align: center; padding: 80px 0;">
-        <h2>Nos Formules</h2>
-        <p class="subtitle" style="margin-bottom: 20px;">Choisissez la formule qui correspond à votre événement.</p>
-
-        <div class="pricing-container">
-            <!-- Basique -->
-            <div class="price-card">
-                <h3>🌿 Basique</h3>
-                <div class="price">
-                    <span class="old-price">59 $</span>
-                    <span class="new-price">53 $</span>
-                    <small>-10% Offre de lancement</small>
-                </div>
-                <ul>
-                    <li>✔ Site de mariage personnalisé</li>
-                    <li>✔ Gestion des invités</li>
-                    <li>✔ Liste des invités (Google Sheets)</li>
-                    <li>✔ Confirmation de présence (RSVP)</li>
-                </ul>
-                <a href="https://wa.me/243829744248?text=Bonjour%20Smartech%2C%20je%20souhaite%20me%20renseigner%20sur%20l%27offre%20Basique." target="_blank" class="btn-cta">Choisir cette offre</a>
+  <section class="section studio" id="carte">
+    <div class="wrap studio-grid">
+      <div>
+        <h2>Nouveau : l'invitation en carte avec QR code</h2>
+        <p class="section-intro">Remplissez les champs, la carte se met à jour en direct. Chaque invité reçoit sa carte avec un QR code personnel à présenter à l'entrée.</p>
+        <form class="formulaire" onsubmit="return false">
+          <div class="champ"><label for="f-invite">Nom de l'invité</label><input id="f-invite" value="Grâce Mbuyi" maxlength="40"></div>
+          <div class="champ"><label for="f-event">Nom de l'événement</label><input id="f-event" value="Mariage Sarah &amp; David" maxlength="40"></div>
+          <div class="champ"><label for="f-date">Date</label><input id="f-date" type="date"></div>
+          <div class="champ"><label for="f-lieu">Lieu</label><input id="f-lieu" value="Salle Le Prestige, Kinshasa" maxlength="60"></div>
+          <div class="champ">
+            <label id="l-couleur">Couleur de la carte</label>
+            <div class="palette" role="group" aria-labelledby="l-couleur">
+              <button type="button" aria-pressed="true" aria-label="Orange" style="background:linear-gradient(135deg,#ff8f4d,#ff5a5f)" data-c1="#ff8f4d" data-c2="#ff5a5f"></button>
+              <button type="button" aria-pressed="false" aria-label="Violet" style="background:linear-gradient(135deg,#7b4fd6,#2a1646)" data-c1="#7b4fd6" data-c2="#2a1646"></button>
+              <button type="button" aria-pressed="false" aria-label="Vert" style="background:linear-gradient(135deg,#2fb67c,#0f5c43)" data-c1="#2fb67c" data-c2="#0f5c43"></button>
+              <button type="button" aria-pressed="false" aria-label="Noir et or" style="background:linear-gradient(135deg,#d4af37,#1f1612)" data-c1="#d4af37" data-c2="#1f1612"></button>
             </div>
+          </div>
+          <a id="commander" class="btn btn-noir" href="#" target="_blank" rel="noopener">Commander cette carte sur WhatsApp</a>
+        </form>
+      </div>
 
-            <!-- Standard -->
-            <div class="price-card popular">
-                <span class="badge">Le plus populaire</span>
-                <h3>⭐ Standard</h3>
-                <div class="price">
-                    <span class="old-price">119 $</span>
-                    <span class="new-price">107 $</span>
-                    <small>-10% Offre de lancement</small>
-                </div>
-                <ul>
-                    <li>✔ Tout de la formule Basique</li>
-                    <li>✔ QR Code pour chaque invité</li>
-                    <li>✔ Envoi automatique des invitations</li>
-                    <li>✔ Scan avec SmartCheck</li>
-                    <li>✔ Suivi des invités présents</li>
-                </ul>
-                <a href="https://wa.me/243829744248?text=Bonjour%20Smartech%2C%20je%20souhaite%20me%20renseigner%20sur%20l%27offre%20Standard." target="_blank" class="btn-cta">Choisir cette offre</a>
-            </div>
-
-            <!-- Premium -->
-            <div class="price-card premium">
-                <h3>💎 Premium</h3>
-                <div class="price">
-                    <span class="old-price">179 $</span>
-                    <span class="new-price">161 $</span>
-                    <small>-10% Offre de lancement</small>
-                </div>
-                <ul>
-                    <li>✔ Tout de la formule Standard</li>
-                    <li>✔ Rappel automatique avant le mariage</li>
-                    <li>✔ Rappel le jour du mariage</li>
-                    <li>✔ Confirmation de présence</li>
-                    <li>✔ Notifications aux mariés</li>
-                    <li>✔ Tableau de bord en temps réel</li>
-                    <li>✔ Statistiques des invités</li>
-                    <li>✔ Support prioritaire</li>
-                </ul>
-                <a href="https://wa.me/243829744248?text=Bonjour%20Smartech%2C%20je%20souhaite%20me%20renseigner%20sur%20l%27offre%20Premium." target="_blank" class="btn-cta">Choisir cette offre</a>
-            </div>
+      <div>
+        <div class="carte" id="carte-apercu" aria-live="polite">
+          <small>Vous êtes invité(e)</small>
+          <h3 id="c-event">Mariage Sarah &amp; David</h3>
+          <div class="invite" id="c-invite">Grâce Mbuyi</div>
+          <div class="infos"><span id="c-date"></span><br><span id="c-lieu"></span></div>
+          <div class="qr"><img id="c-qr" alt="QR code de l'invité" width="140" height="140"></div>
+          <small>Présentez ce QR code à l'entrée</small>
         </div>
-    </section>
-
-    <!-- FENÊTRE POP-UP (MODALE) -->
-    <div id="maModale" class="modale">
-        <div class="modale-content">
-            <span class="fermer" onclick="fermerModale()">&times;</span>
-            <h3 id="modale-titre">Nom du Modèle</h3>
-            
-            <div id="modale-preview" style="background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #aa771c 100%); height: 150px; border-radius: 8px; margin: 15px 0; display: flex; justify-content: center; align-items: center; color: #000; font-weight: bold;">
-                Aperçu du site
-            </div>
-            
-            <a id="btn-whatsapp" href="#" target="_blank" class="btn-info">Obtenir l'info</a>
-        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- Scripts JavaScript -->
-    <script>
-        // Gestion du menu Mobile
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.getElementById('nav-links');
+  <section class="section">
+    <div class="wrap">
+      <h2>Tout ce qu'il faut pour gérer vos invités</h2>
+      <p class="section-intro">Des outils simples, utilisables depuis un téléphone.</p>
+      <div class="fonctions">
+        <div class="fonction"><div class="ico">💌</div><h3>Envoi automatique</h3><p>Les invitations partent par lien WhatsApp ou message, sans copier-coller.</p></div>
+        <div class="fonction"><div class="ico">✅</div><h3>Confirmation de présence</h3><p>Vos invités répondent en un clic, vous voyez la liste se remplir.</p></div>
+        <div class="fonction"><div class="ico">📱</div><h3>Scan à l'entrée</h3><p>Contrôlez les entrées avec SmartCheck et suivez les invités présents.</p></div>
+        <div class="fonction"><div class="ico">⏰</div><h3>Rappels automatiques</h3><p>Un rappel avant l'événement et un autre le jour même.</p></div>
+        <div class="fonction"><div class="ico">📊</div><h3>Tableau de bord en direct</h3><p>Invités confirmés, présents, absents : tout est à jour en temps réel.</p></div>
+        <div class="fonction"><div class="ico">📄</div><h3>Liste Google Sheets</h3><p>Votre liste d'invités reste dans un tableau que vous connaissez déjà.</p></div>
+      </div>
+    </div>
+  </section>
 
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+  <section class="section" id="modeles" style="background:var(--fond-doux)">
+    <div class="wrap">
+      <h2>Nos modèles de mariage</h2>
+      <p class="section-intro">Regardez l'aperçu, ouvrez la démo, puis choisissez celui qui vous ressemble.</p>
+      <div class="modeles">
+        <article class="modele">
+          <div class="video">
+            <span class="promo-tag">-10 % promo</span>
+            <video autoplay loop muted playsinline preload="metadata"><source src="eternel.mp4" type="video/mp4"></video>
+          </div>
+          <div class="corps">
+            <h3>Modèle « Éternel »</h3>
+            <p>Design épuré, galerie photo interactive et liste de mariage en ligne.</p>
+            <div class="liens">
+              <a class="btn btn-noir" href="https://boazmeya-lab.github.io/Invitation-mariage-/" target="_blank" rel="noopener">Voir la démo</a>
+              <a class="btn btn-contour" href="https://wa.me/243829744248?text=Bonjour%20SmartEvent%2C%20je%20choisis%20le%20mod%C3%A8le%20%C3%89ternel." target="_blank" rel="noopener">Choisir</a>
+            </div>
+          </div>
+        </article>
+        <article class="modele">
+          <div class="video">
+            <span class="promo-tag">-10 % promo</span>
+            <video autoplay loop muted playsinline preload="metadata"><source src="boheme.mp4" type="video/mp4"></video>
+          </div>
+          <div class="corps">
+            <h3>Modèle « Bohème »</h3>
+            <p>Couleurs chaudes, RSVP intégré et fil d'actualité pour les invités.</p>
+            <div class="liens">
+              <a class="btn btn-noir" href="https://boazmeya-lab.github.io/Smartech-/" target="_blank" rel="noopener">Voir la démo</a>
+              <a class="btn btn-contour" href="https://wa.me/243829744248?text=Bonjour%20SmartEvent%2C%20je%20choisis%20le%20mod%C3%A8le%20Boh%C3%A8me." target="_blank" rel="noopener">Choisir</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
+  <section class="section chiffres" id="chiffres">
+    <div class="wrap">
+      <h2>Vous nous faites confiance</h2>
+      <p>Merci pour la confiance que vous nous accordez.</p>
+      <div class="chiffres-grid">
+        <div class="chiffre"><b data-cible="349">349</b>Événements</div>
+        <div class="chiffre"><b data-cible="276">276</b>Mariages</div>
+        <div class="chiffre"><b data-cible="35978">35 978</b>Invitations électroniques</div>
+        <div class="chiffre"><b data-cible="8253">8 253</b>Avis des invités</div>
+      </div>
+    </div>
+  </section>
 
-        // Gestion de la Pop-up et redirection dynamique corrigée
-        function ouvrirModale(nomModele) {
-            const titreModale = document.getElementById('modale-titre');
-            const boutonAction = document.getElementById('btn-whatsapp');
-            
-            titreModale.innerText = 'Modèle "' + nomModele + '"';
-            
-            if (nomModele === 'Éternel') {
-                boutonAction.innerText = "Visiter le site éternel";
-                boutonAction.href = "https://boazmeya-lab.github.io/Invitation-mariage-/";
-            } else if (nomModele === 'Bohème') {
-                boutonAction.innerText = "Visiter le site bohème";
-                boutonAction.href = "https://boazmeya-lab.github.io/Smartech-/";
-            } else {
-                boutonAction.innerText = "Obtenir l'info";
-                var monNumero = "243829744248";
-                var message = "Bonjour Smartech, je souhaite obtenir l'info pour le modèle " + nomModele;
-                boutonAction.href = "https://wa.me/" + monNumero + "?text=" + encodeURIComponent(message);
-            }
-            
-            document.getElementById('maModale').style.display = 'flex';
-        }
+  <section class="section" id="tarifs">
+    <div class="wrap">
+      <h2>Nos formules</h2>
+      <p class="section-intro">Prix de lancement : 10 % de réduction déjà appliquée sur toutes les formules.</p>
+      <div class="tarifs-grid">
+        <article class="tarif">
+          <h3>Basique</h3>
+          <div class="prix"><span class="ancien">59 $</span><span class="nouveau">53 $</span></div>
+          <ul>
+            <li>Site de mariage personnalisé</li>
+            <li>Gestion des invités</li>
+            <li>Liste des invités (Google Sheets)</li>
+            <li>Confirmation de présence (RSVP)</li>
+          </ul>
+          <a class="btn btn-contour" href="https://wa.me/243829744248?text=Bonjour%20SmartEvent%2C%20je%20souhaite%20me%20renseigner%20sur%20l%27offre%20Basique." target="_blank" rel="noopener">Choisir Basique</a>
+        </article>
+        <article class="tarif vedette">
+          <span class="badge">Le plus populaire</span>
+          <h3>Standard</h3>
+          <div class="prix"><span class="ancien">119 $</span><span class="nouveau">107 $</span></div>
+          <ul>
+            <li>Tout de la formule Basique</li>
+            <li>QR code pour chaque invité</li>
+            <li>Envoi automatique des invitations</li>
+            <li>Scan avec SmartCheck</li>
+            <li>Suivi des invités présents</li>
+          </ul>
+          <a class="btn btn-noir" href="https://wa.me/243829744248?text=Bonjour%20SmartEvent%2C%20je%20souhaite%20me%20renseigner%20sur%20l%27offre%20Standard." target="_blank" rel="noopener">Choisir Standard</a>
+        </article>
+        <article class="tarif">
+          <h3>Premium</h3>
+          <div class="prix"><span class="ancien">179 $</span><span class="nouveau">161 $</span></div>
+          <ul>
+            <li>Tout de la formule Standard</li>
+            <li>Rappel avant le mariage et le jour J</li>
+            <li>Notifications aux mariés</li>
+            <li>Tableau de bord en temps réel</li>
+            <li>Statistiques des invités</li>
+            <li>Support prioritaire</li>
+          </ul>
+          <a class="btn btn-contour" href="https://wa.me/243829744248?text=Bonjour%20SmartEvent%2C%20je%20souhaite%20me%20renseigner%20sur%20l%27offre%20Premium." target="_blank" rel="noopener">Choisir Premium</a>
+        </article>
+      </div>
+      <div class="devis">
+        <p><b>SmartEvent Business</b> : conférences, lancements de produits et événements d'entreprise. Le prix dépend du nombre d'invités et des fonctionnalités.</p>
+        <a class="btn btn-orange" href="https://wa.me/243829744248?text=Bonjour%20SmartEvent%2C%20je%20souhaite%20un%20devis%20pour%20SmartEvent%20Business." target="_blank" rel="noopener">Demander un devis</a>
+      </div>
+    </div>
+  </section>
 
-        function fermerModale() {
-            document.getElementById('maModale').style.display = 'none';
-        }
+  <section class="section qr-outil">
+    <div class="wrap">
+      <h2>Besoin d'un simple QR code ?</h2>
+      <p class="section-intro" style="margin-inline:auto">Créez gratuitement des QR codes pour vos liens, votre Wi-Fi et vos événements avec SmartLab.</p>
+      <a class="btn btn-noir" href="https://qrcode.smartevent.site" target="_blank" rel="noopener">Créer un QR code gratuit</a>
+    </div>
+  </section>
 
-        window.onclick = function(event) {
-            var modale = document.getElementById('maModale');
-            if (event.target == modale) {
-                modale.style.display = "none";
-            }
-        }
-    </script>
+  <section class="section" id="faq">
+    <div class="wrap faq">
+      <h2>Questions fréquentes</h2>
+      <details><summary>Combien de temps faut-il pour recevoir mon site ?</summary><p>Cela dépend de la formule choisie. Envoyez-nous un message sur WhatsApp avec la date de votre événement, nous vous confirmons le délai.</p></details>
+      <details><summary>Mes invités doivent-ils installer une application ?</summary><p>Non. L'invitation s'ouvre depuis un lien, directement dans le navigateur du téléphone.</p></details>
+      <details><summary>Comment fonctionne le contrôle à l'entrée ?</summary><p>Chaque invité reçoit un QR code personnel. Vous le scannez avec SmartCheck et l'invité est marqué comme présent.</p></details>
+      <details><summary>Puis-je utiliser SmartEvent pour autre chose qu'un mariage ?</summary><p>Oui : anniversaires, fêtes privées, conférences et lancements de produits. Pour les entreprises, nous établissons un devis.</p></details>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="wrap">
+      <div class="logo" style="color:var(--orange)">SmartEvent</div>
+      <p>Invitations numériques, RSVP et QR codes. Shii ba yeba te.</p>
+      <p><a href="https://wa.me/243829744248" target="_blank" rel="noopener">Écrire sur WhatsApp</a> · <a href="https://qrcode.smartevent.site" target="_blank" rel="noopener">SmartLab QR</a></p>
+      <small>© <span id="annee"></span> SmartEvent. Tous droits réservés.</small>
+    </div>
+  </footer>
+
+  <a class="wa" href="https://wa.me/243829744248?text=Bonjour%20SmartEvent%2C%20j%27ai%20une%20question." target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp">WhatsApp</a>
+
+  <script>
+    // Menu mobile
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('menu');
+    burger.addEventListener('click', () => {
+      const ouvert = menu.classList.toggle('ouvert');
+      burger.setAttribute('aria-expanded', ouvert);
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      menu.classList.remove('ouvert');
+      burger.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Carte d'invitation en direct
+    const $ = id => document.getElementById(id);
+    const carte = $('carte-apercu');
+    const champs = ['f-invite', 'f-event', 'f-date', 'f-lieu'];
+
+    // Date par défaut : dans 30 jours
+    const d = new Date(); d.setDate(d.getDate() + 30);
+    $('f-date').value = d.toISOString().slice(0, 10);
+
+    function majCarte() {
+      const invite = $('f-invite').value.trim() || 'Invité';
+      const event = $('f-event').value.trim() || 'Votre événement';
+      const lieu = $('f-lieu').value.trim();
+      const dateVal = $('f-date').value;
+      const dateTxt = dateVal
+        ? new Date(dateVal + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+        : '';
+      $('c-invite').textContent = invite;
+      $('c-event').textContent = event;
+      $('c-date').textContent = dateTxt;
+      $('c-lieu').textContent = lieu;
+
+      const data = 'SmartEvent|' + event + '|' + invite + '|' + dateVal + '|' + lieu;
+      $('c-qr').src = 'https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=0&data=' + encodeURIComponent(data);
+
+      const msg = 'Bonjour SmartEvent, je souhaite commander cette carte d\'invitation :\n'
+        + '- Événement : ' + event + '\n- Invité : ' + invite + '\n- Date : ' + (dateTxt || 'à définir') + '\n- Lieu : ' + (lieu || 'à définir');
+      $('commander').href = 'https://wa.me/243829744248?text=' + encodeURIComponent(msg);
+    }
+    champs.forEach(id => $(id).addEventListener('input', majCarte));
+    document.querySelectorAll('.palette button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.palette button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+        carte.style.setProperty('--c1', btn.dataset.c1);
+        carte.style.setProperty('--c2', btn.dataset.c2);
+      });
+    });
+    majCarte();
+
+    // Compteurs animés
+    const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fmt = n => n.toLocaleString('fr-FR');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target, cible = +el.dataset.cible;
+        obs.unobserve(el);
+        if (reduit) { el.textContent = fmt(cible); return; }
+        const debut = performance.now(), duree = 1400;
+        (function tick(t) {
+          const p = Math.min((t - debut) / duree, 1);
+          el.textContent = fmt(Math.round(cible * (1 - Math.pow(1 - p, 3))));
+          if (p < 1) requestAnimationFrame(tick);
+        })(debut);
+      });
+    }, { threshold: .4 });
+    document.querySelectorAll('[data-cible]').forEach(el => obs.observe(el));
+
+    $('annee').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

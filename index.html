@@ -20,17 +20,36 @@
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-content">
-        <p class="eyebrow" id="slogan"></p>
-        <h1>Les plus beaux moments méritent d'être vécus, puis gardés.</h1>
-        <p class="hero-text">Chaque invitation est une promesse. Nous la rendons belle, simple à partager et impossible à oublier.</p>
-        <div class="hero-actions">
-          <a href="#services" class="btn btn-primary">Voir nos services</a>
-          <a href="contact.html" class="btn btn-light">Demander un devis</a>
-        </div>
-      </div>
-    </section>
+<section class="hero">
+  <!-- Carrousel d'images de fond / visuels -->
+  <div class="hero-slider">
+    <div class="slide active" style="background-image: url('image/hero-1.jpg');"></div>
+    <div class="slide" style="background-image: url('image/hero-2.jpg');"></div>
+    <div class="slide" style="background-image: url('image/hero-3.jpg');"></div>
+  </div>
+
+  <!-- Overlay sombre pour garantir que le texte reste bien lisible -->
+  <div class="hero-overlay"></div>
+
+  <!-- Contenu du Hero -->
+  <div class="hero-content">
+    <p class="eyebrow" id="slogan"></p>
+    <h1>Les plus beaux moments méritent d'être vécus, puis gardés.</h1>
+    <p class="hero-text">Chaque invitation est une promesse. Nous la rendons belle, simple à partager et impossible à oublier.</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn btn-primary">Voir nos services</a>
+      <a href="contact.html" class="btn btn-light">Demander un devis</a>
+    </div>
+
+    <!-- Indicateurs (points) optionnels pour naviguer -->
+    <div class="slider-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
 
     <section class="section" id="services">
       <h2>Nos services</h2>

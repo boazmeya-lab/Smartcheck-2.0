@@ -1,41 +1,34 @@
 <!DOCTYPE html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SmartEvent – Invitations papier et numériques à Kinshasa</title>
-<link rel="icon" href="image/image.png">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css"></head><body>
-<header><div class="wrap nav">
-<a class="logo" href="index.html"><img src="image/image.png" alt="" onerror="this.remove()"><span>SmartEvent</span></a>
-<button id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu">☰</button>
-<nav id="menu"><ul><li><a href="index.html">Accueil</a></li><li><a href="index.html#services">Nos services</a></li><li><a href="index.html#contact">Contact</a></li></ul></nav>
-</div></header>
-<main>
-<section class="hero" id="accueil"><div class="wrap">
-<div><span class="slogan">Chii ba yeba te</span>
-<h1>Vos événements, bien invités et bien gérés.</h1>
-<p>SmartEvent modernise la manière d'inviter vos proches à Kinshasa : invitations papier intelligentes et invitations numériques à partager sur WhatsApp.</p>
-<div class="cta"><a class="btn" href="#services">Découvrir nos services</a><a class="btn ghost" href="#" data-wa>WhatsApp</a></div></div>
-<div class="stage" aria-hidden="true">
-<div class="phone"><div><small>Vous êtes invités</small><b>Nathalie &amp; Joël</b><small>Samedi, 18h00 · Kinshasa</small></div></div>
-<div class="qrcard"><canvas id="heroQr" width="84" height="84"></canvas><div><b>Carte invitation</b><small>Scannez pour confirmer votre présence</small></div></div>
-</div></div></section>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SmartEvent | La technologie au service des événements</title>
+  <meta name="description" content="Invitations physiques premium avec QR code et invitations numériques à Kinshasa.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="navbar">
+    <a href="index.html" class="brand">
+      <img src="image/image.png" alt="Logo SmartEvent">
+    </a>
+    <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="menu">
+      <a href="index.html">Accueil</a>
+      <a href="#services">Services</a>
+      <a href="#mariages">Mariages</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-<section id="services"><div class="wrap">
-<h2>Nos services</h2><p class="lead">Deux solutions pour inviter et accueillir vos invités. Cliquez pour voir les détails.</p>
-<div class="grid">
-<a class="card" href="service-papier.html"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 18h2v2h-2z"/></svg></div>
-<h3>Invitation papier intelligente</h3><p>Invitations physiques premium au design moderne et élégant, avec QR code intégré à la carte.</p><span class="more">Voir le service →</span></a>
-<a class="card" href="service-numerique.html"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM4 8l8 6 8-6"/></svg></div>
-<h3>Invitations numériques</h3><p>Invitations accessibles sur téléphone, faciles à partager par WhatsApp, avec confirmation de présence.</p><span class="more">Voir le service →</span></a>
-</div></div></section>
+  <main>
+    <section class="hero">
+      <h1 id="slogan"></h1>
+      <p>La technologie au service de vos événements.</p>
+    </section>
+  </main>
 
-<section id="contact" style="background:#fff"><div class="wrap">
-<h2>Contact</h2><p class="lead">Écrivez-nous, nous répondons dès que possible.</p>
-<div id="coords"></div><p style="margin-top:16px"><a class="btn" href="#" data-wa>WhatsApp</a></p></div></section>
-</main>
-<footer><div class="wrap"><div><b style="color:#fff;font-family:var(--fd);font-size:1.2rem">SmartEvent</b><br>Chii ba yeba te<br>Kinshasa, RDC</div><div id="socials"></div></div></footer>
-<div id="toast" role="status"></div><script src="app.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-<script>
-(function(){if(!window.qrcode)return;try{const c=$("#heroQr"),q=qrcode(0,"M");q.addData(location.href.startsWith("http")?location.href:"https://smartevent.site");q.make();const n=q.getModuleCount(),s=Math.floor(168/(n+8));c.width=c.height=s*(n+8);const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.fillStyle="#2A1236";for(let r=0;r<n;r++)for(let k=0;k<n;k++)if(q.isDark(r,k))x.fillRect((k+4)*s,(r+4)*s,s,s)}catch(e){}})();
-</script></body></html>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

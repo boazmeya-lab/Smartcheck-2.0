@@ -4,29 +4,92 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SmartEvent | La technologie au service des événements</title>
-  <meta name="description" content="Invitations physiques premium avec QR code et invitations numériques à Kinshasa.">
+  <meta name="description" content="Sites d'invitation et invitations papier intelligentes avec QR code, depuis Kinshasa.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header class="navbar">
-    <a href="index.html" class="brand">
-      <img src="image/logo.png" alt="Logo SmartEvent">
-    </a>
+    <a href="index.html" class="brand"><img src="image/image.png" alt="Logo SmartEvent"></a>
     <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <nav class="nav-links" id="menu">
-      <a href="index.html">Accueil</a>
       <a href="#services">Services</a>
-      <a href="#mariages">Mariages</a>
-      <a href="#contact">Contact</a>
+      <a href="#commander">Comment commander</a>
+      <a href="#histoire">Notre histoire</a>
+      <a href="contact.html" class="nav-cta">Demander un devis</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <h1 id="slogan"></h1>
-      <p>La technologie au service de vos événements.</p>
+      <div class="hero-content">
+        <p class="eyebrow" id="slogan"></p>
+        <h1>Les plus beaux moments méritent d'être vécus, puis gardés.</h1>
+        <p class="hero-text">Chaque invitation est une promesse. Nous la rendons belle, simple à partager et impossible à oublier.</p>
+        <div class="hero-actions">
+          <a href="#services" class="btn btn-primary">Voir nos services</a>
+          <a href="contact.html" class="btn btn-light">Demander un devis</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <h2>Nos services</h2>
+      <p class="section-sub">Deux façons d'inviter, une même élégance.</p>
+      <div class="cards">
+        <article class="service">
+          <span class="num">01</span>
+          <h3>Site internet d'événement</h3>
+          <ul>
+            <li>Une page à votre image</li>
+            <li>Confirmation de présence (RSVP)</li>
+            <li>Galerie photo</li>
+            <li>Lien à envoyer sur WhatsApp</li>
+          </ul>
+          <a href="services.html#site-evenement" class="btn btn-primary">Sélectionner</a>
+        </article>
+        <article class="service">
+          <span class="num">02</span>
+          <h3>Invitation papier intelligente</h3>
+          <ul>
+            <li>Invitation en carton premium</li>
+            <li>QR code qui ouvre directement le site de votre mariage</li>
+            <li>Site de mariage offert avec la carte</li>
+          </ul>
+          <a href="services.html#invitation-papier" class="btn btn-primary">Sélectionner</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="commander">
+      <h2>Comment commander</h2>
+      <ol class="steps">
+        <li><strong>Sélectionnez le service</strong><span>Site d'événement ou invitation papier.</span></li>
+        <li><strong>Choisissez votre offre</strong><span>Celle qui correspond à votre événement.</span></li>
+        <li><strong>Le tour est joué</strong><span>Nous nous occupons du reste.</span></li>
+      </ol>
+    </section>
+
+    <section class="section" id="histoire">
+      <h2>Notre histoire</h2>
+      <div class="story">
+        <p>SmartEvent est née à Kinshasa d'une idée simple : une invitation ne devrait pas s'arrêter au papier.</p>
+        <p>Nous réunissons l'élégance des cartes d'invitation et la simplicité du numérique, pour que chaque invité reçoive toutes les informations d'un simple scan.</p>
+        <p>Notre ambition : faire émerger de RDC une marque technologique qui transforme l'expérience des événements.</p>
+      </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <img src="image/image.png" alt="SmartEvent" class="footer-logo">
+    <p id="footer-ville"></p>
+    <nav class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#commander">Comment commander</a>
+      <a href="#histoire">Notre histoire</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <small>© <span id="annee"></span> SmartEvent. Tous droits réservés.</small>
+  </footer>
 
   <script src="js/config.js"></script>
   <script src="js/main.js"></script>
